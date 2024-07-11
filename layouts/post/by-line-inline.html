@@ -1,0 +1,14 @@
+<div class="inline-flex flex-wrap mb-4 text-base">
+  {{ with .GetTerms "authors" }}
+    {{ range $author := . }}
+    <a href="{{ .RelPermalink }}" class="hover:underline font-bold flex mr-2 items-center">
+      {{ with .Params.image }}
+        {{ with resources.Get . }}
+          <img class="w-6 mr-1 rounded-full border border-red-500" src="{{ .RelPermalink }}" alt="Image for {{ $author.Title }}">
+        {{ end }}
+      {{ end }}
+      <span>{{ .Title }}</span>
+    </a>
+    {{ end }}
+  {{ end }}
+</div>

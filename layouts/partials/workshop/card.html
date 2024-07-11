@@ -1,0 +1,55 @@
+{{/*
+  workshop/card
+  Print a list item for a Workshop
+
+  @author @regisphilibert
+
+  @context Map
+    see func/ParseWorkshop@return
+
+*/}}
+<div class="p-8 mb-5 border"
+  {{- range $key, $value := .filters -}}
+    {{- printf `data-%s="%s"` $key $value | safeHTMLAttr -}}
+  {{- end -}}
+>
+  <div class="flex mb-4 -mx-2">
+    {{ with .type }}
+    <div class="flex items-center mx-2"> {{ with .image }}<img class="mx-1" src="{{ . }}" alt="">{{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
+    {{ end }}
+    {{ with .country }}
+    <div class="flex items-center mx-2"> {{ with .image }}<img class="mx-1" width="20" height="20" class="mr-1" src="/flags/{{ . }}.svg" alt="">{{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
+    {{ end }}
+    {{ with .meeting }}
+      <div class="flex items-center mx-2"> {{ with .image }}<img class="mx-1" src="{{ . }}" alt="">{{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
+    {{ end }}
+  </div>
+  {{ with $venue := .venue }}
+  <h3 class="title text-base md:text-[1.75rem] leading-[2.125rem] font-semibold">
+    {{ with $.url }}
+      <a class="underline hover:text-blue-hover text-gray-dark" href="{{ . }}">{{ $venue }}</a>
+    {{ else }}
+      <span class="text-gray-dark">{{ $venue }}</span>
+    {{ end }}
+  </h3>
+  {{ end }}
+  {{ with .curriculum }}
+    {{ with .name }}
+      <div class="mb-5 text-lg font-semibold text-gray-mid">{{ . }}</div>
+    {{ end }}
+  {{ end }}
+  {{ with .instructors }}
+    <div class="mb-2 text-xs">
+      <strong class="font-bold">Instructors</strong>: <span class="instructors">{{ delimit . ", " }}</span>
+    </div>
+  {{ end }}
+  {{ with .helpers }}
+    <div class="mb-4 text-xs">
+      <strong class="font-bold">Helpers</strong>: <span class="helpers">{{ delimit . ", " }}</span>
+    </div>
+  {{ end }}
+
+  {{ with .string_date }}
+    <div class="text-sm font-semibold text-gray-mid">{{ . }}</div>
+  {{ end }}
+</div>

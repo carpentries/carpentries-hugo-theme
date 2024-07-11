@@ -1,0 +1,10 @@
+<div
+  x-show="activeDropdown === '{{ .Parent.Identifier }}'"
+  x-transition.origin.top.left
+  style="display: none;"
+  class="lg:absolute z-50 lg:shadow-lg lg:bg-gray-light lg:top-[100%] whitespace-nowrap lg:px-7 lg:py-3 lg:left-[-30px] mb-2 lg:mb-0 -mt-2 lg:-mt-0">
+  {{ range .items }}
+
+  <a href="{{ .URL }}" class="block px-2 py-2 hover:underline">{{ .Name }}</a>
+  {{ end }}
+</div>

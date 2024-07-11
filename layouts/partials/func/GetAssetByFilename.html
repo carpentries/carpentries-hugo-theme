@@ -1,0 +1,23 @@
+{{/*
+  GetAssetByFilename
+  Retrieves an asset from its filename (test_image.png) regardless of its location in the asset directory
+
+  @author @regisphilibert
+
+  @context String (.)
+
+  @access private
+
+  @returns Resource
+
+  @example - Go Template
+    {{ with partialCached "GetAssetByFilename" "test_image.jpg" }}
+      <img src="{{ .RelPermalink }}" />
+    {{ end }}
+*/}}
+{{ $asset := "" }}
+{{ with resources.GetMatch (printf "/**/%s" .) }}
+  {{ $asset = . }}
+{{ end }}
+
+{{ return $asset }}

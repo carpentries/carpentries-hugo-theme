@@ -1,0 +1,49 @@
+{{ define "main" }}
+  <div class="container px-5 mx-auto">
+    {{ partial "breadcrumbs" . }}
+    <div class="mb-12">
+      <h1 class="text-[2rem] leading-[2.8125rem] font-semibold">{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+        <h2 class="mt-2 text-xl"> {{ . }}</h2>
+      {{ end }}
+    </div>
+    <div class="relative grid gap-8 md:grid-cols-12">
+      <div class="col-span-8 pb-16 pro">
+        {{ range .Pages.ByTitle }}
+          <div class="mb-4">
+            <h3 class="mb-2 text-2xl font-bold" id="blog-{{ $.Data.Singular }}-{{ urlize .Title }}"><a class="hover:underline" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          {{ with .Pages }}
+            <div class="prose">
+              <ul>
+                {{ range . }}
+                  <li>
+                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    <p class="not-prose"><time datetime="{{ .Date }}">{{ .Date.Format (site.Params.date_format | default "2 April, 2006") }}</time></p>
+                  </li>
+                {{ end }}
+              </ul>
+            </div>
+          {{ end }}
+          </div>
+        {{ end }}
+      </div>
+      <div class="relative col-span-4">
+        <div class="">
+
+          <div class="prose">
+            <h3>List of {{ .Data.Plural }}</h3>
+            <ul>
+              {{ range .Data.Terms.Alphabetical }}
+              <li>
+                <a href="#blog-{{ $.Data.Singular }}-{{ urlize .Page.Title }}">{{ .Page.Title }} ({{ .Count }})</a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{{ end }}

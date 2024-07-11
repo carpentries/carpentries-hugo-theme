@@ -1,0 +1,14 @@
+{{ $destination := .Destination }}
+{{ with resources.Get $destination }}
+  {{ $destination = .RelPermalink }}
+{{ end }}
+<figure class="my-[2.5rem] not-prose">
+  <div class="overflow-hidden border rounded-xl">
+    <img class="mx-auto lazyload" src="{{ $destination }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}"{{ end }} />
+  </div>
+  {{ with .Title }}
+    <figcaption class="mt-4 text-xs">
+      {{ $.Page.RenderString . }}
+    </figcaption>
+  {{ end }}
+</figure>

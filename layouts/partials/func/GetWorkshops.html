@@ -1,0 +1,31 @@
+{{/*
+  GetWorkshops
+  Returned data parsed workshop for a given feed
+
+  @author @regisphilibert
+
+  @context String (.)
+
+  @access private
+
+  @returns []Map
+    See func/ParseWorkshop
+
+  @uses
+     - func/GetFeed
+     - func/ParseWorkshop
+
+  @example - Go Template
+    {{ with partial "func/GetWorkshops" "https://feeds.carpentries.org/all_upcoming_workshops.json" }}
+      {{ range . }}
+        {{ partial "workshop/card" . }}
+      {{ end }}
+    {{ end }}
+*/}}
+{{ $entries := slice }}
+{{ with partial "func/GetFeed" . }}
+  {{ range . }}
+    {{ $entries = $entries | append (partial "func/ParseWorkshop" .) }}
+  {{ end }}
+{{ end }}
+{{ return $entries }}

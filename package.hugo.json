@@ -1,0 +1,48 @@
+{
+  "author": "theNewDynamic",
+  "comments": {
+    "dependencies": {},
+    "devDependencies": {
+      "@alpinejs/intersect": "project",
+      "@tailwindcss/forms": "project",
+      "@tailwindcss/typography": "project",
+      "alpinejs": "project",
+      "postcss": "project",
+      "postcss-cli": "project",
+      "tailwindcss": "project"
+    }
+  },
+  "dependencies": {},
+  "description": "Replace this description with project's",
+  "devDependencies": {
+    "@alpinejs/intersect": "^3.13.7",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.0",
+    "alpinejs": "^3.13.7",
+    "postcss": "^8.4.35",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.0"
+  },
+  "keywords": [
+    "template"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "carpentries_theme",
+  "repository": {
+    "type": "git",
+    "url": "/"
+  },
+  "scripts": {
+    "clean": "rm -rf public/ static/dist resources",
+    "deploy": "npm run prod:hugo",
+    "dev:hugo": "HUGO_ENV=development bin/hugo* server --minify -D --gc --navigateToChanged --noHTTPCache",
+    "dev:netlify": "netlify dev -l",
+    "modinit": "bin/hugo* mod init $REPO",
+    "modpack": "bin/hugo* mod npm pack",
+    "prod:hugo": "HUGO_ENV=production bin/hugo* --gc --minify --cleanDestinationDir",
+    "start": "npm run dev:hugo",
+    "version": "auto-changelog -p --template keepachangelog --unreleased true"
+  },
+  "version": "0.1.0"
+}

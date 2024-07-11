@@ -1,0 +1,33 @@
+{{/*
+  persons
+  Shortcode to display a list of persons from a API endpoint
+
+  @author @regisphilibert
+
+  @params
+    String (.feed)
+    String (.where)
+
+  @access public
+
+  @uses
+     - func/GetPersons
+
+  @example - Mardkown
+    {{< persons feed="https://feeds.carpentries.org/all_badged_people.json" where="is_instructor,true" >}}
+*/}}
+{{ with site.Data.governance.committees }}
+  {{ range . }}
+    <strong>{{ .committee_name }}</strong>
+    <ul>
+      {{ with .chair }}
+      <li><strong>Chair: </strong>{{ . }}</li>
+      {{ end }}
+      {{ with .members }}
+        {{ range . }}
+          <li>{{ . }}</li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  {{ end }}
+{{ end }}

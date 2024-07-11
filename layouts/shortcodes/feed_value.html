@@ -1,0 +1,15 @@
+{{- $feed := .Get "feed" | default "https://feeds.carpentries.org/badges_stats.json" -}}
+{{- $key := .Get "key" -}}
+{{- $index := .Get "index" -}}
+{{- $data := partialCached "func/GetFeed" $feed $feed -}}
+{{- with $data -}}
+  {{- with $index -}}
+    {{- $data = index $data $index -}}
+  {{- end -}}
+  {{- with $key -}}
+    {{- $data = index $data $key -}}
+  {{- end -}}
+{{- end -}}
+{{- with $data -}}
+{{- . -}}
+{{- end -}}

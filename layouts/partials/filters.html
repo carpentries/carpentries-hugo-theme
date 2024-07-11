@@ -1,0 +1,16 @@
+{{ $placeholder := .placeholder | default "Search" }}
+{{/* Will be used by filter.js script */}}
+<div id="filtersData" class="hidden">{{ $ | jsonify }}</div>
+<div class="flex items-center justify-between mb-4">
+  <label for="search" class="block text-xl font-bold">{{ $placeholder }}</label>
+  <button id="clear-filters" class="px-4 py-2 text-sm border rounded bg-slate-200">Clear filters</button>
+</div>
+<input aria-labelledby="search" placeholder="{{ $placeholder }}" autocomplete="off" type="search" name="q" id="search" class="block w-full px-4 py-2 mb-4 border rounded search-input">
+{{ range .filters }}
+<select class="w-full mb-4 rounded" name="{{ .key }}" id="{{ .key }}">
+  <option value="none">Filter by {{ .label }}</option>
+  {{ range .options }}
+    <option value="{{ . }}">{{ . }}</option>
+  {{ end }}
+</select>
+{{ end }}

@@ -1,0 +1,64 @@
+{{ define "add_to_head" }}
+  {{ with resources.Get "/js/list.min.js" }}
+    <script defer src="{{ .RelPermalink }}"></script>
+  {{ end }}
+  {{ with resources.Get "/js/filters.js" }}
+    <script defer src="{{ .RelPermalink }}"></script>
+  {{ end }}
+{{ end }}
+{{ define "main" }}
+  {{ $entries := slice }}
+  {{ $filtersData := dict }}
+
+  {{ with .Params.data_source }}
+    {{ $entries = partialCached "func/GetWorkshops" . . }}
+    {{ $filtersArgs := dict
+      "entries" $entries
+      "filters" (slice
+        (dict
+          "key" "country"
+          "label" "Country"
+        )
+        (dict
+          "key" "meeting"
+          "label" "Delivery"
+        )
+        (dict
+          "key" "curriculum"
+          "label" "Curriculum"
+        )
+        (dict
+          "key" "type"
+          "label" "Lesson Program"
+        )
+      )
+    }}
+    {{ $filtersData = partial "func/GetFiltersFromEntries" $filtersArgs }}
+  {{ end }}
+  <div class="container px-5 mx-auto">
+    {{ partial "breadcrumbs" . }}
+    <h1 class="text-[2rem] leading-[2.8125rem] font-semibold mb-6">{{ .Title }}</h1>
+    {{ partial "subnav" . }}
+    {{ $countries := slice }}
+    <div id="filter" class="relative grid grid-cols-1 gap-8 md:grid-cols-12">
+      <div class="pb-16 md:col-span-8 pro">
+        {{ .Render "list-feedback" }}
+        <div class="filtered">
+          {{ range $entries }}
+            {{ partial "workshop/card" . }}
+          {{ end }}
+        </div>
+        <ul class="flex justify-center text-2xl pagination"></ul>
+      </div>
+      <div class="relative md:col-span-4">
+        <div class="sticky top-10 sidebar">
+          {{ partial "filters" (dict
+            "filters" $filtersData.filters
+            "placeholder" "Search workshops"
+            ) }}
+          {{ .Render "sidebar" }}
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

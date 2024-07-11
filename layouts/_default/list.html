@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <div class="container px-5 mx-auto">
+    {{ partial "breadcrumbs" . }}
+    <h1 class="text-[2rem] leading-[2.8125rem] font-semibold mb-6">{{ .Title }}</h1>
+    <div class="relative grid gap-8 md:grid-cols-12">
+      <div class="col-span-8 pb-16 pro">
+      {{ range (.Paginator 10).Pages }}
+        {{ .Render "card" }}
+      {{ end }}
+      {{ template "_internal/pagination.html" . }}
+      </div>
+      <div class="relative col-span-4">
+        <div class="sticky top-10 sidebar">
+          {{ .Render "sidebar" }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+{{ end }}

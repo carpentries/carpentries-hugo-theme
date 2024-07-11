@@ -1,0 +1,24 @@
+{{/*
+  GetCurriculum
+  Returned data parsed curriculums
+
+  @author @regisphilibert
+
+  @context Any
+
+  @access private
+
+  @returns []Map
+    See func/ParseCurriculum
+
+  @uses
+     - func/GetFeed
+     - func/ParseCurriculum
+*/}}
+{{ $entries := slice }}
+{{ with partial "func/GetFeed" "curricula" }}
+  {{ range . }}
+    {{ $entries = $entries | append (partial "func/ParseCurriculum" .) }}
+  {{ end }}
+{{ end }}
+{{ return $entries }}

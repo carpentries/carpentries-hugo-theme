@@ -1,0 +1,13 @@
+{{ with .Params.nav }}
+  {{ with index site.Menus . }}
+  <ul class="flex flex-wrap pb-3 my-8 text-sm font-extrabold border-b">
+    {{ range . }}
+      {{ $active := false }}
+      {{- if ($.IsMenuCurrent .Menu .) }}
+        {{ $active = true }}
+      {{- end }}
+      <li class="mb-2"><a href="{{ .URL }}" class="pr-10 pyr-2 font-bold hover:underline {{ cond $active "underline" ""}}">{{ .Name }}</a></li>
+    {{ end }}
+  </ul>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,70 @@
+<header class="">
+  <div class="text-white bg-blue-mid" x-data="{ open: false }">
+    <div class="container px-5 mx-auto">
+      <div class="flex flex-col items-center md:justify-start md:flex-row" :class="open ? 'h-auto' : 'h-10 overflow-hidden'">
+        {{ range site.Menus.top }}
+          {{ $active := false }}
+          {{ $class := printf "px-4 py-[10px] font-bold text-sm hover:underline md:first:bg-gray-light md:first:text-blue-mid %s" (cond $active "bg-white text-blue-900" "default") }}
+          {{ $aria_current := "page" }}
+          {{- if or ($.IsMenuCurrent .Menu .) ($.HasMenuCurrent .Menu .) }}
+            {{ $active = true }}
+          {{- end }}
+          <a href="{{ .URL }}" aria-current="{{ cond $active true "page" }}" class="{{ $class }}">{{ .Name }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+
+  <div class="py-4 bg-gray-light" x-data="{ mobileOpen: false, activeDropdown: null }" @click.outside="activeDropdown = null">
+    <div class="container relative flex px-5 mx-auto">
+      <div class="w-40">
+        <a href="/"><img width="156" height="33" class="max-w-[117px] md:max-w-none" src="/carpentries-logo.svg" alt="The Carpentries"></a>
+      </div>
+      <div class="flex justify-end flex-1 lg:hidden">
+        <button class="flex items-center navbar-toggler" :aria-expanded="mobileOpen ? 'true' : 'false'" x-on:click="mobileOpen = ! mobileOpen">
+          <span class="navbar-toggler-hamburger">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </span>
+          <span class="text-blue-bright">Menu</span>
+        </button>
+      </div>
+      <div
+        class="absolute z-30 max-w-[250px] w-full right-0 top-10 lg:top-0 lg:!flex flex-col justify-end flex-1 lg:max-w-5xl px-6 py-3 mx-auto text-sm font-bold bg-white shadow-md lg:shadow-none lg:py-0 lg:pl-10 lg:items-center lg:bg-transparent lg:relative lg:flex-row"
+        x-show="mobileOpen"
+      >
+        {{ range $item := site.Menus.main }}
+            {{ $active := false }}
+            {{ $class := printf "pr-8 hover:underline mb-4 lg:mb-0 inline-block %s" (cond $active "bg-white text-blue-900" "default") }}
+            {{ $aria_current := "page" }}
+            {{- if or ($.IsMenuCurrent .Menu .) ($.HasMenuCurrent .Menu .) }}
+              {{ $active = true }}
+            {{- end }}
+            {{ if eq .Params.style "button" }}
+              {{ $class = "inline-block py-2 px-5 text-blue-500 border border-blue-900 rounded-full [&>span]:pr-0" }}
+            {{ end }}
+            <div
+              class="relative group"
+              x-on:keydown.escape.prevent.stop="activeDropdown = null"
+            >
+              {{ if .Children }}
+                {{ $identifier := .Identifier }}
+                <button
+                  x-on:click="activeDropdown = activeDropdown === '{{ $identifier }}' ? null : '{{ $identifier }}'"
+                  type="button"
+                  aria-current="{{ cond $active true "page" }}"
+                  class="{{ $class }} {{ with .Children }}menu-has-children{{ end }}"><span class="relative pr-4"></s>{{ .Name }}</span>
+                </button>
+              {{ else }}
+                <a href="{{ .URL }}" aria-current="{{ cond $active true "page" }}" class="{{ $class }}">{{ .Name }}</a>
+              {{ end }}
+              {{ with .Children }}
+                {{ partial "submenu" (dict "Parent" $item "items" . ) }}
+              {{ end }}
+            </div>
+          {{ end }}
+      </div>
+    </div>
+  </div>
+</header>

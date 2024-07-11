@@ -1,0 +1,12 @@
+<style>
+  .code-wrap pre{
+  margin: 0
+}
+</style>
+{{ $open := eq (.Get 0) "open" }}
+<details class="border my-8 code-wrap" {{ with $open }}open{{ end }}>
+  <summary class="cursor-pointer bg-gray-light py-2 px-4">Markdown</summary>
+  <div class="p-4">
+    {{ .Inner }}
+  </div>
+</details>

@@ -1,0 +1,31 @@
+{{/*
+  GetLessons
+  Returned data parsed lessons from the `lessons.yaml` data file
+
+  @author @regisphilibert
+
+  @context Any
+
+  @access private
+
+  @returns []Map
+    See func/ParseLesson
+
+  @uses
+     - func/ParseLesson
+
+  @example - Go Template
+    {{ with partial "func/Lessons" "Lessons" }}
+      {{ range . }}
+        {{ partial "lesson/card" . }}
+      {{ end }}
+    {{ end }}
+*/}}
+
+{{ $entries := slice }}
+{{ with site.Data.lessons }}
+  {{ range . }}
+    {{ $entries = $entries | append (partial "func/ParseLesson" .) }}
+  {{ end }}
+{{ end }}
+{{ return $entries }}

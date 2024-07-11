@@ -1,0 +1,16 @@
+{{- with $.Page.TableOfContents }}
+<style>
+  #TableOfContents li{
+    margin-bottom: .5rem;
+  }
+  #TableOfContents li a{
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 14px;
+  }
+</style>
+<div id="table" class="p-5 border in-page-toc">
+  <h2 class="mb-5 text-sm font-semibold">Table of Contents</h2>
+  {{ . }}
+</div>
+{{- end }}

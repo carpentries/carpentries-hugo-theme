@@ -1,0 +1,52 @@
+- id: info_website
+  translation: "About The Carpentries"
+- id: archive
+  translation: "Archive"
+- id: blog_archive
+  translation: "Blog Archive"
+- id: blog
+  translation: "Blog"
+- id: comments_headline
+  translation: "Dialogue &amp; Discussion"
+- id: more
+  translation: "More ›"
+- id: more_articles
+  translation: "More Posts"
+- id: navigation_title
+  translation: "Navigation"
+- id: new_blog_entries
+  translation: "New Blog Posts"
+- id: next
+  translation: "Next"
+- id: next_posts
+  translation: "Next Posts"
+- id: previous
+  translation: "Previous"
+- id: previous_posts
+  translation: "Previous Posts"
+- id: read
+  translation: "Read"
+- id: read_more
+  translation: "Read More&nbsp;›"
+- id: if_you_are_not_redirected_automatically
+  translation: "If you are not redirected automatically,"
+- id: click_here
+  translation: "click here"
+- id: next_post_in
+  translation: "Next Post in"
+- id: previous_post_in
+  translation: "Previous Post in"
+- id: breadcrumb_start
+  translation: "Home"
+- id: edit
+  translation: "Edit"
+- id: this_content_is_open_source
+  translation: "This content is open source."
+- id: help_improve_it
+  translation: "Help improve it"
+- id: enter_search_term
+  translation: "Enter search term and hit enter"
+- id: upcoming_workshops
+  translation: "Upcoming Carpentries Workshops"
+- id: past_workshops
+  translation: "Past Carpentries Workshops"

@@ -1,0 +1,576 @@
+- iso2c: AF
+  country_name: Afghanistan
+- iso2c: AX
+  country_name: Åland Islands
+- iso2c: AL
+  country_name: Albania
+- iso2c: DZ
+  country_name: Algeria
+- iso2c: AS
+  country_name: American Samoa
+- iso2c: AD
+  country_name: Andorra
+- iso2c: AO
+  country_name: Angola
+- iso2c: AI
+  country_name: Anguilla
+- iso2c: AQ
+  country_name: Antarctica
+- iso2c: AG
+  country_name: Antigua & Barbuda
+- iso2c: AR
+  country_name: Argentina
+- iso2c: AM
+  country_name: Armenia
+- iso2c: AW
+  country_name: Aruba
+- iso2c: AU
+  country_name: Australia
+- iso2c: AT
+  country_name: Austria
+- iso2c: NA
+  country_name: Austria-Hungary
+- iso2c: AZ
+  country_name: Azerbaijan
+- iso2c: NA
+  country_name: Baden
+- iso2c: BS
+  country_name: Bahamas
+- iso2c: BH
+  country_name: Bahrain
+- iso2c: BD
+  country_name: Bangladesh
+- iso2c: BB
+  country_name: Barbados
+- iso2c: NA
+  country_name: Bavaria
+- iso2c: BY
+  country_name: Belarus
+- iso2c: BE
+  country_name: Belgium
+- iso2c: BZ
+  country_name: Belize
+- iso2c: BJ
+  country_name: Benin
+- iso2c: BM
+  country_name: Bermuda
+- iso2c: BT
+  country_name: Bhutan
+- iso2c: BO
+  country_name: Bolivia
+- iso2c: BA
+  country_name: Bosnia & Herzegovina
+- iso2c: BW
+  country_name: Botswana
+- iso2c: BV
+  country_name: Bouvet Island
+- iso2c: BR
+  country_name: Brazil
+- iso2c: IO
+  country_name: British Indian Ocean Territory
+- iso2c: VG
+  country_name: British Virgin Islands
+- iso2c: BN
+  country_name: Brunei
+- iso2c: NA
+  country_name: Brunswick
+- iso2c: BG
+  country_name: Bulgaria
+- iso2c: BF
+  country_name: Burkina Faso
+- iso2c: BI
+  country_name: Burundi
+- iso2c: KH
+  country_name: Cambodia
+- iso2c: CM
+  country_name: Cameroon
+- iso2c: CA
+  country_name: Canada
+- iso2c: CV
+  country_name: Cape Verde
+- iso2c: BQ
+  country_name: Caribbean Netherlands
+- iso2c: KY
+  country_name: Cayman Islands
+- iso2c: CF
+  country_name: Central African Republic
+- iso2c: TD
+  country_name: Chad
+- iso2c: NA
+  country_name: Channel Islands
+- iso2c: CL
+  country_name: Chile
+- iso2c: CN
+  country_name: China
+- iso2c: CX
+  country_name: Christmas Island
+- iso2c: CC
+  country_name: Cocos (Keeling) Islands
+- iso2c: CO
+  country_name: Colombia
+- iso2c: KM
+  country_name: Comoros
+- iso2c: CG
+  country_name: Congo - Brazzaville
+- iso2c: CD
+  country_name: Congo - Kinshasa
+- iso2c: CK
+  country_name: Cook Islands
+- iso2c: CR
+  country_name: Costa Rica
+- iso2c: CI
+  country_name: Côte d’Ivoire
+- iso2c: HR
+  country_name: Croatia
+- iso2c: CU
+  country_name: Cuba
+- iso2c: CW
+  country_name: Curaçao
+- iso2c: CY
+  country_name: Cyprus
+- iso2c: CZ
+  country_name: Czechia
+- iso2c: NA
+  country_name: Czechoslovakia
+- iso2c: DK
+  country_name: Denmark
+- iso2c: DJ
+  country_name: Djibouti
+- iso2c: DM
+  country_name: Dominica
+- iso2c: DO
+  country_name: Dominican Republic
+- iso2c: EC
+  country_name: Ecuador
+- iso2c: EG
+  country_name: Egypt
+- iso2c: SV
+  country_name: El Salvador
+- iso2c: GQ
+  country_name: Equatorial Guinea
+- iso2c: ER
+  country_name: Eritrea
+- iso2c: EE
+  country_name: Estonia
+- iso2c: SZ
+  country_name: Eswatini
+- iso2c: ET
+  country_name: Ethiopia
+- iso2c: FK
+  country_name: Falkland Islands
+- iso2c: FO
+  country_name: Faroe Islands
+- iso2c: FJ
+  country_name: Fiji
+- iso2c: FI
+  country_name: Finland
+- iso2c: FR
+  country_name: France
+- iso2c: GF
+  country_name: French Guiana
+- iso2c: PF
+  country_name: French Polynesia
+- iso2c: TF
+  country_name: French Southern Territories
+- iso2c: GA
+  country_name: Gabon
+- iso2c: GM
+  country_name: Gambia
+- iso2c: GE
+  country_name: Georgia
+- iso2c: NA
+  country_name: German Democratic Republic
+- iso2c: DE
+  country_name: Germany
+- iso2c: GH
+  country_name: Ghana
+- iso2c: GI
+  country_name: Gibraltar
+- iso2c: GR
+  country_name: Greece
+- iso2c: GL
+  country_name: Greenland
+- iso2c: GD
+  country_name: Grenada
+- iso2c: GP
+  country_name: Guadeloupe
+- iso2c: GU
+  country_name: Guam
+- iso2c: GT
+  country_name: Guatemala
+- iso2c: GG
+  country_name: Guernsey
+- iso2c: GN
+  country_name: Guinea
+- iso2c: GW
+  country_name: Guinea-Bissau
+- iso2c: GY
+  country_name: Guyana
+- iso2c: HT
+  country_name: Haiti
+- iso2c: NA
+  country_name: Hamburg
+- iso2c: NA
+  country_name: Hanover
+- iso2c: HM
+  country_name: Heard & McDonald Islands
+- iso2c: NA
+  country_name: Hesse Electoral
+- iso2c: NA
+  country_name: Hesse Grand Ducal
+- iso2c: NA
+  country_name: Hesse-Darmstadt
+- iso2c: NA
+  country_name: Hesse-Kassel
+- iso2c: HN
+  country_name: Honduras
+- iso2c: HK
+  country_name: Hong Kong SAR China
+- iso2c: HU
+  country_name: Hungary
+- iso2c: IS
+  country_name: Iceland
+- iso2c: IN
+  country_name: India
+- iso2c: ID
+  country_name: Indonesia
+- iso2c: IR
+  country_name: Iran
+- iso2c: IQ
+  country_name: Iraq
+- iso2c: IE
+  country_name: Ireland
+- iso2c: IM
+  country_name: Isle of Man
+- iso2c: IL
+  country_name: Israel
+- iso2c: IT
+  country_name: Italy
+- iso2c: JM
+  country_name: Jamaica
+- iso2c: JP
+  country_name: Japan
+- iso2c: JE
+  country_name: Jersey
+- iso2c: JO
+  country_name: Jordan
+- iso2c: KZ
+  country_name: Kazakhstan
+- iso2c: KE
+  country_name: Kenya
+- iso2c: KI
+  country_name: Kiribati
+- iso2c: NA
+  country_name: Kosovo
+- iso2c: KW
+  country_name: Kuwait
+- iso2c: KG
+  country_name: Kyrgyzstan
+- iso2c: LA
+  country_name: Laos
+- iso2c: LV
+  country_name: Latvia
+- iso2c: LB
+  country_name: Lebanon
+- iso2c: LS
+  country_name: Lesotho
+- iso2c: LR
+  country_name: Liberia
+- iso2c: LY
+  country_name: Libya
+- iso2c: LI
+  country_name: Liechtenstein
+- iso2c: LT
+  country_name: Lithuania
+- iso2c: LU
+  country_name: Luxembourg
+- iso2c: MO
+  country_name: Macao SAR China
+- iso2c: MG
+  country_name: Madagascar
+- iso2c: MW
+  country_name: Malawi
+- iso2c: MY
+  country_name: Malaysia
+- iso2c: MV
+  country_name: Maldives
+- iso2c: ML
+  country_name: Mali
+- iso2c: MT
+  country_name: Malta
+- iso2c: MH
+  country_name: Marshall Islands
+- iso2c: MQ
+  country_name: Martinique
+- iso2c: MR
+  country_name: Mauritania
+- iso2c: MU
+  country_name: Mauritius
+- iso2c: YT
+  country_name: Mayotte
+- iso2c: NA
+  country_name: Mecklenburg Schwerin
+- iso2c: MX
+  country_name: Mexico
+- iso2c: FM
+  country_name: Micronesia (Federated States of)
+- iso2c: NA
+  country_name: Modena
+- iso2c: MD
+  country_name: Moldova
+- iso2c: MC
+  country_name: Monaco
+- iso2c: MN
+  country_name: Mongolia
+- iso2c: ME
+  country_name: Montenegro
+- iso2c: MS
+  country_name: Montserrat
+- iso2c: MA
+  country_name: Morocco
+- iso2c: MZ
+  country_name: Mozambique
+- iso2c: MM
+  country_name: Myanmar (Burma)
+- iso2c: NA
+  country_name: Namibia
+- iso2c: NA
+  country_name: Nassau
+- iso2c: NR
+  country_name: Nauru
+- iso2c: NP
+  country_name: Nepal
+- iso2c: NL
+  country_name: Netherlands
+- iso2c: NA
+  country_name: Netherlands Antilles
+- iso2c: NC
+  country_name: New Caledonia
+- iso2c: NZ
+  country_name: New Zealand
+- iso2c: NI
+  country_name: Nicaragua
+- iso2c: NE
+  country_name: Niger
+- iso2c: NG
+  country_name: Nigeria
+- iso2c: NU
+  country_name: Niue
+- iso2c: NF
+  country_name: Norfolk Island
+- iso2c: KP
+  country_name: North Korea
+- iso2c: MK
+  country_name: North Macedonia
+- iso2c: MP
+  country_name: Northern Mariana Islands
+- iso2c: 'NO'
+  country_name: Norway
+- iso2c: NA
+  country_name: Oldenburg
+- iso2c: OM
+  country_name: Oman
+- iso2c: NA
+  country_name: Orange Free State
+- iso2c: PK
+  country_name: Pakistan
+- iso2c: PW
+  country_name: Palau
+- iso2c: PS
+  country_name: Palestinian Territories
+- iso2c: PA
+  country_name: Panama
+- iso2c: PG
+  country_name: Papua New Guinea
+- iso2c: PY
+  country_name: Paraguay
+- iso2c: NA
+  country_name: Parma
+- iso2c: PE
+  country_name: Peru
+- iso2c: PH
+  country_name: Philippines
+- iso2c: NA
+  country_name: Piedmont-Sardinia
+- iso2c: PN
+  country_name: Pitcairn Islands
+- iso2c: PL
+  country_name: Poland
+- iso2c: PT
+  country_name: Portugal
+- iso2c: NA
+  country_name: Prussia
+- iso2c: PR
+  country_name: Puerto Rico
+- iso2c: QA
+  country_name: Qatar
+- iso2c: NA
+  country_name: Republic of Vietnam
+- iso2c: RE
+  country_name: Réunion
+- iso2c: RO
+  country_name: Romania
+- iso2c: RU
+  country_name: Russia
+- iso2c: RW
+  country_name: Rwanda
+- iso2c: MF
+  country_name: Saint Martin (French part)
+- iso2c: WS
+  country_name: Samoa
+- iso2c: SM
+  country_name: San Marino
+- iso2c: ST
+  country_name: São Tomé & Príncipe
+- iso2c: NA
+  country_name: Sardinia
+- iso2c: SA
+  country_name: Saudi Arabia
+- iso2c: NA
+  country_name: Saxe-Weimar-Eisenach
+- iso2c: NA
+  country_name: Saxony
+- iso2c: SN
+  country_name: Senegal
+- iso2c: RS
+  country_name: Serbia
+- iso2c: NA
+  country_name: Serbia and Montenegro
+- iso2c: SC
+  country_name: Seychelles
+- iso2c: SL
+  country_name: Sierra Leone
+- iso2c: SG
+  country_name: Singapore
+- iso2c: SX
+  country_name: Sint Maarten
+- iso2c: SK
+  country_name: Slovakia
+- iso2c: SI
+  country_name: Slovenia
+- iso2c: SB
+  country_name: Solomon Islands
+- iso2c: SO
+  country_name: Somalia
+- iso2c: NA
+  country_name: Somaliland
+- iso2c: ZA
+  country_name: South Africa
+- iso2c: GS
+  country_name: South Georgia & South Sandwich Islands
+- iso2c: KR
+  country_name: South Korea
+- iso2c: SS
+  country_name: South Sudan
+- iso2c: ES
+  country_name: Spain
+- iso2c: LK
+  country_name: Sri Lanka
+- iso2c: BL
+  country_name: St. Barthélemy
+- iso2c: SH
+  country_name: St. Helena
+- iso2c: KN
+  country_name: St. Kitts & Nevis
+- iso2c: LC
+  country_name: St. Lucia
+- iso2c: PM
+  country_name: St. Pierre & Miquelon
+- iso2c: VC
+  country_name: St. Vincent & Grenadines
+- iso2c: SD
+  country_name: Sudan
+- iso2c: SR
+  country_name: Suriname
+- iso2c: SJ
+  country_name: Svalbard & Jan Mayen
+- iso2c: SE
+  country_name: Sweden
+- iso2c: CH
+  country_name: Switzerland
+- iso2c: SY
+  country_name: Syria
+- iso2c: TW
+  country_name: Taiwan
+- iso2c: TJ
+  country_name: Tajikistan
+- iso2c: TZ
+  country_name: Tanzania
+- iso2c: TH
+  country_name: Thailand
+- iso2c: TL
+  country_name: Timor-Leste
+- iso2c: TG
+  country_name: Togo
+- iso2c: TK
+  country_name: Tokelau
+- iso2c: TO
+  country_name: Tonga
+- iso2c: TT
+  country_name: Trinidad & Tobago
+- iso2c: TN
+  country_name: Tunisia
+- iso2c: TR
+  country_name: Turkey
+- iso2c: TM
+  country_name: Turkmenistan
+- iso2c: TC
+  country_name: Turks & Caicos Islands
+- iso2c: NA
+  country_name: Tuscany
+- iso2c: TV
+  country_name: Tuvalu
+- iso2c: NA
+  country_name: Two Sicilies
+- iso2c: VI
+  country_name: U.S. Virgin Islands
+- iso2c: UG
+  country_name: Uganda
+- iso2c: UA
+  country_name: Ukraine
+- iso2c: AE
+  country_name: United Arab Emirates
+- iso2c: NA
+  country_name: United Arab Republic
+- iso2c: GB
+  country_name: United Kingdom
+- iso2c: NA
+  country_name: United Province CA
+- iso2c: US
+  country_name: United States
+- iso2c: UM
+  country_name: United States Minor Outlying Islands (the)
+- iso2c: UY
+  country_name: Uruguay
+- iso2c: UZ
+  country_name: Uzbekistan
+- iso2c: VU
+  country_name: Vanuatu
+- iso2c: VA
+  country_name: Vatican City
+- iso2c: VE
+  country_name: Venezuela
+- iso2c: VN
+  country_name: Vietnam
+- iso2c: WF
+  country_name: Wallis & Futuna
+- iso2c: EH
+  country_name: Western Sahara
+- iso2c: NA
+  country_name: Wuerttemburg
+- iso2c: NA
+  country_name: Würtemberg
+- iso2c: YE
+  country_name: Yemen
+- iso2c: NA
+  country_name: Yemen Arab Republic
+- iso2c: NA
+  country_name: Yemen People's Republic
+- iso2c: NA
+  country_name: Yugoslavia
+- iso2c: ZM
+  country_name: Zambia
+- iso2c: NA
+  country_name: Zanzibar
+- iso2c: ZW
+  country_name: Zimbabwe

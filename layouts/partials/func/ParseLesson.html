@@ -1,0 +1,87 @@
+{{/*
+  ParseWorkshop
+  Structure the data for a Workshop
+
+  @author @regisphilibert
+
+  @context Example
+  ```yaml
+  - program: SWC
+    name: The Unix Shell
+    description: An introduction to working with the shell, for researchers and others who want to learn how to automate repetitive tasks and easily combine smaller tasks into larger, more powerful workflows.
+    tool: Shell
+    skill: Automating tasks; Tracking versions
+    language: English
+    domain: General
+    url: http://swcarpentry.github.io/shell-novice
+  ```
+  @access private
+
+  @returns Map
+    String (.title)
+    String (.description)
+    Map (.tool)
+      String (.key)
+      String (.name)
+    Map (.skill)
+      String (.key)
+      String (.name)
+    Map (.language)
+      String (.key)
+      String (.name)
+    Map (.program)
+      String (.key)
+      String (.name)
+*/}}
+
+{{ $s := newScratch }}
+{{ $s.Set "data" dict }}
+{{ $s.Set "filters" dict }}
+{{ $replaces := slice
+  (dict
+    "from" "SWC"
+    "to" "Software Carpentry"
+  )
+  (dict
+    "from" "DC"
+    "to" "Data Carpentry"
+  )
+  (dict
+    "from" "LC"
+    "to" "Library Carpentry"
+  )
+}}
+{{ range $key, $value := . }}
+  {{ if in (slice "language" "program" "tool" "skill") $key }}
+    {{ with $value }}
+      {{ $input := $value }}
+      {{ $output := slice }}
+      {{ if not (reflect.IsSlice $input) }}
+        {{ if in $input "; " }}
+          {{ $output = split . "; " }}
+        {{ else }}
+          {{ $output = slice $input }}
+        {{ end }}
+      {{ end }}
+      {{ with delimit $output ", "}}
+        {{ $output = . }}
+        {{ range $replaces }}
+          {{ $output = replace $output .from .to }}
+        {{ end }}
+        {{ $outputObject := dict
+          "name" $output
+          "key" $output
+        }}
+
+        {{ $s.SetInMap "data" $key $outputObject }}
+        {{ $s.SetInMap "filters" $key $output }}
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    {{ $s.SetInMap "data" $key $value }}
+  {{ end }}
+{{ end }}
+{{ with $s.Get "filters" }}
+  {{ $s.SetInMap "data" "filters" . }}
+{{ end }}
+{{ return $s.Get "data" }}

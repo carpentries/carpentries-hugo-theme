@@ -1,0 +1,8 @@
+{{ with partial "func/GetBreadcrumbs" . }}
+  <div class="flex my-12 text-sm font-bold">
+    {{ range . }}
+      <a href="{{ .URL }}" class="underline ">{{ .Name }}</a><span class="inline-block mx-2">></span>
+    {{ end }}
+    {{ $.Title }}
+  </div>
+{{ end }}

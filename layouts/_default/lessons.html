@@ -1,0 +1,60 @@
+{{ define "add_to_head" }}
+  {{ with resources.Get "/js/list.min.js" }}
+    <script defer src="{{ .RelPermalink }}"></script>
+  {{ end }}
+  {{ with resources.Get "/js/filters.js" }}
+    <script defer src="{{ .RelPermalink }}"></script>
+  {{ end }}
+{{ end }}
+{{ define "main" }}
+  {{ $entries := slice }}
+  {{ $entries = partialCached "func/GetLessons" "GetLessons" }}
+  {{ $filtersArgs := dict
+    "entries" $entries
+    "filters" (slice
+      (dict
+        "key" "language"
+        "label" "Language"
+      )
+      (dict
+        "key" "program"
+        "label" "Lesson Program"
+      )
+      (dict
+        "key" "skill"
+        "label" "Skill"
+      )
+      (dict
+        "key" "tool"
+        "label" "Tool"
+      )
+
+    )
+  }}
+  {{ $filtersData := partialCached "func/GetFiltersFromEntries" $filtersArgs "LessonsFilters" }}
+  <div class="container px-5 mx-auto">
+    {{ partial "breadcrumbs" . }}
+    <h1 class="text-[2rem] leading-[2.8125rem] font-semibold mb-6">{{ .Title }}</h1>
+    {{ partial "subnav" . }}
+    <div id="filter" class="relative grid grid-cols-1 gap-8 md:grid-cols-12">
+      <div class="pb-16 md:col-span-8 pro">
+        {{ .Render "list-feedback" }}
+        <div class="filtered">
+          {{ range $entries }}
+            {{ partial "lesson/card" . }}
+          {{ end }}
+        </div>
+        <ul class="flex justify-center text-2xl pagination"></ul>
+      </div>
+      <div class="relative md:col-span-4">
+        <div class="sticky top-10">
+          {{ partial "filters" (dict
+            "filters" $filtersData.filters
+            "placeholder" "Search lessons"
+          ) }}
+          {{ .Render "sidebar" }}
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

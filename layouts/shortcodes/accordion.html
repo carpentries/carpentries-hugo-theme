@@ -1,0 +1,9 @@
+{{ $title := .Get "title" | default "Read more" }}
+<details class="border">
+  {{ with $title }}
+    <summary class="cursor-pointer bg-primary-100 py-2 px-4">{{ . }}</summary>
+  {{ end }}
+  <div class="p-4">
+    {{ $.Page.RenderString .Inner }}
+  </div>
+</details>

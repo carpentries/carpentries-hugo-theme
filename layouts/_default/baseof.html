@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="{{ or site.Language.LanguageCode site.Language.Lang }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<head>
+  {{ partial "head.html" . }}
+  {{ block "add_to_head" . }}{{ end }}
+</head>
+<body class="font-sans">
+  <header>
+    {{ partial "header.html" . }}
+  </header>
+  <div class="h-full flex flex-col justify-between">
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+    <footer>
+      {{ partial "footer.html" . }}
+    </footer>
+  </div>
+</body>
+</html>

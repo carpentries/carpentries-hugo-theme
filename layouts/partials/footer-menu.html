@@ -1,0 +1,11 @@
+<div class="grid grid-cols-1 gap-5 md:grid-cols-5 lg:grid-cols-6">
+  {{ range $item := site.Menus.footer }}
+    <div x-data="{ open: false }">
+      <h4 class="inline-flex mb-2 text-sm md:font-bold md:pointer-events-none relative md:after:content-none after:content-[''] after:bg-[url('/chevron-down-white.svg')] after:bg-no-repeat after:right-[-14px] after:top-[8px] after:w-2 after:h-2 after:absolute"><button x-on:click="open = ! open">{{ .Name }}</button></h4>
+      {{ $identifier := .Identifier }}
+      {{ with .Children }}
+        {{ partial "footer-submenu" (dict "Parent" $item "items" . ) }}
+      {{ end }}
+    </div>
+  {{ end }}
+</div>

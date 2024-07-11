@@ -1,0 +1,5 @@
+<ul class="text-sm md:text-xs font-bold md:font-extrabold [&>li]:mb-2 hover:[&>li>a]:underline md:h-auto pl-5 md:pl-0 md:[&>li>a:after]:content-none [&>li>a:after]:content-[''] [&>li>a:after]:bg-[url('/arrow-right-white.svg')] [&>li>a:after]:bg-no-repeat [&>li>a:after]:right-[-14px] [&>li>a:after]:top-[5px] [&>li>a:after]:w-[9px] [&>li>a:after]:h-[9px] [&>li>a:after]:absolute" :class="open ? 'h-auto' : 'h-0 overflow-hidden'">
+  {{ range .items }}
+    <li><a class="relative" href="{{ .URL }}">{{ .Name }}</a></li>
+  {{ end }}
+</ul>

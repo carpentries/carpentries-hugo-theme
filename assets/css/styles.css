@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body{
+  height: 100%;
+  min-height: 100%;
+}
+.menu-has-children span {
+  @apply after:content-[''] after:bg-[url('/chevron-down-black.svg')] after:bg-no-repeat after:right-0 after:top-[6px] after:w-2 after:h-2 after:absolute;
+}
+
+.navbar-toggler-hamburger {
+  margin-right: 10px;
+  position: relative;
+  height: 12px;
+  width: 16px;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+}
+.hamburger-line {
+  position: absolute;
+  background: #383838;
+  height: 2px;
+  width: 100%;
+  opacity: 1;
+  left: 0;
+  border-radius: 4px;
+  display: block;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+.hamburger-line:nth-child(1) {
+  top: 0px;
+  transform-origin: left center;
+}
+.hamburger-line:nth-child(2) {
+  top: 5px;
+  transform-origin: left center;
+}
+.hamburger-line:nth-child(3) {
+  top: 10px;
+  transform-origin: left center;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-hamburger .hamburger-line:nth-child(1) {
+  transform: rotate(45deg);
+  top: 0;
+  left: 0;
+}
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-hamburger .hamburger-line:nth-child(2) {
+  width: 0%;
+  opacity: 0;
+}
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-hamburger .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 11px;
+  left: 0;
+}
+
+.sidebar #TableOfContents li.active a:before {
+  @apply content-[''] pl-5 bg-[url('/arrow-right-black.svg')] bg-no-repeat;
+}
+
+.table-striped th, .table-striped td{
+  padding-left: .5em;
+  padding-right: .5em;
+}
+.table-striped tr:nth-child(even) {
+  background-color: #f2f2f2; /* or any other shade of gray you prefer */
+}
+
+.sidebar #TableOfContents ul li ul {
+  @apply hidden;
+}
+
+p.button a,
+.btn-blue
+{
+  @apply inline-flex items-center px-4 py-2 text-sm leading-tight text-white no-underline rounded-full md:text-base bg-blue-bright;
+}
+p.button a:after,
+.btn-blue:after{
+  @apply block ml-2 font-bold;
+  width: 16px;
+  height: 21px;
+  content: url('/icons/arrow-right-white.svg')
+}
+
+ul.badges{
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  @apply -mx-2;
+}
+
+ul.badges li{
+  @apply inline-flex items-center px-2 py-1 mx-2 text-xs uppercase bg-offwhite;
+}
+ul.badges li:before{
+  content: url(/icons/check.svg);
+  display: inline-block;
+  margin-right: .5rem;
+  width: 10px;
+}
+
+.stat{
+  @apply flex flex-col items-center justify-center text-center uppercase bg-gray-300 rounded-full aspect-square max-w-[240px] w-full mx-auto;
+}
+.stat strong{
+  display: block;
+  line-height: 1.1;
+  font-size: 2em;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-outline {
+  border-radius: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-weight: 600;
+  color: #0044D7;
+  background: transparent;
+  border: 1px solid #0044D7;
+  @apply hover:bg-[#E6EEF8] hover:border-[#0034A4];
+}
+
+.btn-outline::after {
+  content: '';
+  background-image: url('/arrow-right-blue.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+  top: 1px;
+  margin-left: 8px;
+  border: none !important;
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+}
+
+.testimonial-quote:after {
+  content: '';
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #FF4955;
+  width: 40px;
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pagination {
+  @apply flex justify-center p-0 list-none;
+}
+
+.pagination li {
+  @apply px-1;
+}
+
+.pagination li.active {
+  @apply font-bold;
+}

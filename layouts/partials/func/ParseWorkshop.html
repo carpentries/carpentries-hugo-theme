@@ -1,0 +1,200 @@
+{{/*
+  ParseWorkshop
+  Structure the data for a Workshop
+
+  @author @regisphilibert
+
+  @context Example
+  ```json
+  {
+    "instructors": "Daniel Chavez",
+    "end_date": "2024-06-17",
+    "url": "https://dechavezv.github.io/2024-03-25-puce/",
+    "administrator_id": 343,
+    "curriculum": "mix-and-match",
+    "venue": "Pontificia Universidad Católica del Ecuador",
+    "longitude": -78.490922,
+    "slug": "2024-03-25-puce",
+    "tag_name": "automated-email,Circuits",
+    "helpers": null,
+    "host_name": "Pontifical Catholic University of Ecuador",
+    "country": "EC",
+    "latitude": -0.210843,
+    "start_date": "2024-03-25"
+  }
+
+  @access private
+
+  @returns Map
+    String (.url)
+    String (.venue)
+    String (.start_date)
+    String (.end_date)
+    String (.string_date)
+    []String (.instructors)
+    []String (.helpers)
+    String (.string_date)
+    Map (.filters)
+      String (.country)
+      String (.meeting)
+      String (.curriculum)
+      String (.type)
+    Map (.type)
+      String (.key)
+      String (.name)
+    Map (.meeting)
+      String (.key)
+      String (.name)
+    Map (.country)
+      String (.key)
+      String (.name)
+    Map (.curriculum)
+      String (.key)
+      String (.name)
+*/}}
+
+{{ $s := newScratch }}
+{{ $s.Set "data" dict }}
+{{ $s.Set "filters" dict }}
+{{ with .host_name }}
+  {{ $s.SetInMap "data" "venue" . }}
+{{ end }}
+{{ with .url }}
+  {{ $s.SetInMap "data" "url" . }}
+{{ end }}
+{{/* We build a list of names for instructors and helpers */}}
+{{ with .instructors }}
+  {{ $s.SetInMap "data" "instructors" (split . ",") }}
+{{ else }}
+  {{ $s.SetInMap "data" "instructors" slice }}
+{{ end }}
+{{ with .helpers }}
+  {{ $s.SetInMap "data" "helpers" (split . ",") }}
+{{ else }}
+  {{ $s.SetInMap "data" "helpers" slice }}
+{{ end }}
+
+{{/* string_date needs the day of start and of end. */}}
+{{ $start_date := "" }}
+{{ $end_date := "" }}
+{{ with .start_date }}
+  {{/* First we use the full date (in case there's no end date) */}}
+  {{ $start_date = time.Format "Jan 02 2006" (time .) }}
+  {{ $string_date := $start_date }}
+  {{ with $.end_date }}
+    {{/* If an end date, then we use just the month and day for start, and full date for end seperated by `-` */}}
+    {{ $start_date = time.Format "Jan 02" (time $.start_date)  }}
+    {{ $end_date = time.Format "Jan 02 2006" (time .) }}
+    {{ $string_date = delimit (slice $start_date $end_date) " - " }}
+  {{ end }}
+  {{ $s.SetInMap "data" "string_date" $string_date }}
+{{ end }}
+
+{{/* Tags will be processed depending on a comma seperated list "tag_nage" */}}
+{{ $tags := slice }}
+{{ $tagsOutput := slice }}
+{{ with .tag_name }}
+  {{ $tags = split . "," }}
+  {{ $s.SetInMap "data" "tags" . }}
+  {{/* Type is Software if... */}}
+  {{ if in $tags "SWC" }}
+    {{ $s.SetInMap "data" "type" (dict
+      "key" "software"
+      "name" "Software Carpentry"
+      "image" "/software.svg"
+    ) }}
+  {{/* Type is Data if... */}}
+  {{ else if in $tags "DC" }}
+    {{ $s.SetInMap "data" "type" (dict
+      "key" "data"
+      "name" "Data Carpentry"
+      "image" "/data.svg"
+    ) }}
+  {{/* Type is Library if... */}}
+  {{ else if in $tags "LC" }}
+    {{ $s.SetInMap "data" "type" (dict
+      "key" "library"
+      "name" "Library Carpentry"
+      "image" "/library.svg"
+    ) }}
+  {{/* Type is The Carpentries if... */}}
+  {{ else if in $tags "Circuits" }}
+    {{ $s.SetInMap "data" "type" (dict
+      "key" "carpentries"
+      "name" "The Carpentries"
+      "image" "/carpentries.svg"
+    ) }}
+  {{ end }}
+
+  {{/* For meeting, we use the same source */}}
+
+  {{/* Meeing is In Person if... */}}
+  {{ if in $tags "online" }}
+    {{ $s.SetInMap "data" "meeting" (dict
+      "key" "online"
+      "name" "Online"
+      "image" "/Online.svg"
+    ) }}
+  {{/* Else, Meeting is Online */}}
+  {{ else }}
+    {{ $s.SetInMap "data" "meeting" (dict
+      "key" "in-person"
+      "name" "In Person"
+      "image" "/In-Person.svg"
+    ) }}
+  {{ end }}
+{{ end }}
+
+{{/* For the language we need to pair the language code stored in `.country` with a name found in the `data/country_codes` data file.
+  So we can return a map similar to Type and Meeting (key, name)
+*/}}
+{{ $country := dict }}
+{{ with $code := .country }}
+  {{ with where site.Data.country_codes "iso2c" . }}
+    {{ with index . 0 }}
+      {{ $country = dict
+        "key" (lower $code)
+        "name" .country_name
+        "image" (lower $code)
+      }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ with $country }}
+  {{ $s.SetInMap "data" "country" . }}
+{{ else }}
+  {{ $s.SetInMap "data" "country" dict  }}
+{{ end }}
+
+{{/* For the curriculum we need to pair the curriculum key stored in `.curriculum` with a name found at https://feeds.carpentries.org/amy_curricula.json.
+  So we can return a map similar to Type and Meeting (key, name)
+*/}}
+{{ with $curr_code := .curriculum }}
+  {{ with partialCached "func/GetCurriculums" "GetCurriculums" }}
+    {{ with where . ".key" $curr_code }}
+      {{ with index . 0 }}
+        {{ $s.SetInMap "data" "curriculum" . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ with $s.Get "data"}}
+  {{ with .country }}
+    {{ $s.SetInMap "filters" "country" .name }}
+  {{ end }}
+  {{ with .meeting }}
+    {{ $s.SetInMap "filters" "meeting" .name }}
+  {{ end }}
+  {{ with .curriculum }}
+    {{ $s.SetInMap "filters" "curriculum" .name }}
+  {{ end }}
+  {{ with .type }}
+    {{ $s.SetInMap "filters" "type" .name }}
+  {{ end }}
+
+{{ end }}
+{{ with $s.Get "filters" }}
+  {{ $s.SetInMap "data" "filters" . }}
+{{ end }}
+{{ return $s.Get "data" }}

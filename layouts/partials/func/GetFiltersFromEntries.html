@@ -1,0 +1,88 @@
+{{/*
+  GetFiltersFromEntries
+  Collects various filters options from a given Collection.
+
+  @author @regisphilibert
+
+  @context Map (.)
+    Collection (.entries)
+    Slice (.filters)
+      - String (.key)
+        String (.label)
+  @access private
+
+  @returns Map
+    []Maps (.filters)
+      String (.key)
+      String (.label)
+      []String (.options)
+
+  @example
+
+  {{ $entries = partialCached "func/GetWorkshops" . . }}
+    {{ $filtersArgs := dict
+      "entries" $entries
+      "filters" (slice
+        (dict
+          "key" "country"
+          "label" "Country"
+        )
+        (dict
+          "key" "meeting"
+          "label" "Delivery"
+        )
+        (dict
+          "key" "curriculum"
+          "label" "Curriculum"
+        )
+      )
+    }}
+    {{ $filters = partialCached "func/GetFiltersFromEntries" $filtersArgs "WorkshopFilters" }}
+    {{ range $filters }}
+      <select name="{{ .key }}" id="{{ .key }}">
+        {{ range .options }}
+          <option value="{{ . }}">{{ . }}</option>
+        {{ end }}
+      </select>
+    {{ end }}
+*/}}
+
+{{ $s := newScratch }}
+{{ $s.Set "data" dict }}
+
+{{ $filters := .filters }}
+{{ range $filters }}
+  {{ $s.Set .key (slice) }}
+{{ end }}
+{{ range .entries }}
+  {{ with .filters }}
+    {{ range $key, $value := . }}
+      {{ $output := slice }}
+      {{/* If we find a comma, it means we have mutliple options
+        and should split the string into an array. Exception for the curriculum whose title might contain a comma */}}
+      {{ if (and (in $value ", ") (ne $key "curriculum")) }}
+        {{ $output = split $value ", " }}
+      {{ else }}
+        {{ $output = slice $value }}
+      {{ end }}
+      {{/* We always expect an array */}}
+      {{ range $output }}
+        {{ $s.Add $key . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $filtersOutput := slice }}
+{{ range $filter := $filters }}
+  {{ with $s.Get .key }}
+    {{/* Now we create the final array mergin each filter's
+    initial key, label with found options */}}
+    {{ $filtersOutput = $filtersOutput | append (
+      merge $filter
+        (dict "options" (sort (uniq .)))) }}
+  {{ end }}
+{{ end }}
+
+{{/* We return a map in case we need more information later. */}}
+{{ return (dict "filters" $filtersOutput) }}

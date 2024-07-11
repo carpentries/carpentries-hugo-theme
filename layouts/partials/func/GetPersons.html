@@ -1,0 +1,36 @@
+{{/*
+  GetPersons
+  Returned data parsed person for a given feed
+
+  @author @regisphilibert
+
+  @context Map
+    String (.endpoint)
+    String (.where)
+
+  @access private
+
+  @returns []Map
+    See func/ParsePerson
+
+  @uses
+     - func/GetFeed
+     - func/ParsePerson
+
+  @example - Go Template
+    {{ with partial "func/GetPersons" (dict
+      "endpoint" "https://feeds.carpentries.org/all_badged_people.json"
+      "where" "is_instructor,true")
+    }}
+      {{ range . }}
+        {{ partial "person/card" . }}
+      {{ end }}
+    {{ end }}
+*/}}
+{{ $entries := slice }}
+{{ with partial "func/GetFeed" . }}
+  {{ range . }}
+    {{ $entries = $entries | append (partial "func/ParsePerson" .) }}
+  {{ end }}
+{{ end }}
+{{ return $entries }}

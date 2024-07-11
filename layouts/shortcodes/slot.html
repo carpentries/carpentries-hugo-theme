@@ -1,0 +1,6 @@
+{{ $colspan := .Get "span" | default 1 }}
+<div class="col-span-{{ $colspan }}">
+{{ with .InnerDeindent }}
+{{ $.Page.RenderString . }}
+{{ end }}
+</div>

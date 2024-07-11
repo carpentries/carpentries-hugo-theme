@@ -1,0 +1,21 @@
+{{- $title := .Get "title" -}}
+{{- $image := .Get "image" -}}
+{{- $asset := dict -}}
+{{ $wrapper := "" }}
+{{- with $image -}}
+  {{- $asset = resources.Get . -}}
+  {{ $wrapper = "grid md:grid-cols-6 gap-8" }}
+{{- end -}}
+
+<div class="{{ $wrapper }} my-16">
+  {{ with $asset }}
+    <img class="block md:order-2 col-span-2" src="{{ $asset.RelPermalink }}" alt="">
+  {{ end }}
+  <div class="md:order-1 md:col-span-4">
+    {{ with $title }}
+      <h2>{{ . }}</h2>
+    {{ end }}
+    {{ $.Page.RenderString .Inner }}
+  </div>
+
+</div>

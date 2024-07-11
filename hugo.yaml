@@ -1,0 +1,17 @@
+baseURL: 'https://example.org/'
+languageCode: en-us
+title: My New Hugo Site
+build:
+  writeStats: true
+  buildStats:
+    disableClasses: false
+    disableIDs: false
+    disableTags: false
+    enable: false
+module:
+  hugoVersion:
+    extended: false
+    min: 0.116.0
+Params:
+  date_format: "2 April, 2006"
+  date_format_with_time: "2 April, 2006 at 15:04:05 UTC"

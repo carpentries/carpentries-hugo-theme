@@ -1,0 +1,10 @@
+{{ $columns := .Get "cols" | default 3 }}
+{{ $columns = int $columns }}
+{{ $gap := .Get "gap" | default 1 }}
+{{ $gap = mul $gap 4 }}
+{{ $classes := slice "grid" }}
+{{ $classes = $classes | append (print "md:grid-cols-" $columns) }}
+{{ $classes = $classes | append (printf "gap-%x" $gap) }}
+<div class="{{ delimit $classes " " }} my-8">
+  {{ .Inner }}
+</div>

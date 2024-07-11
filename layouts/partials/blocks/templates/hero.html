@@ -1,0 +1,26 @@
+{{/*
+  blocks/hero
+
+  @author @AdamChlan @regisphilibert
+
+  @context Map (.)
+    Page (.Page)
+    Map (.block)
+      String (.title)
+      String (.image)
+*/}}
+{{ with .block }}
+<div class="relative pt-40 pb-36">
+  {{ with .image }}
+    {{ with resources.Get . }}
+    <img class="absolute inset-0 object-fill w-full h-full brightness-[.85] z-10" src="{{ .RelPermalink }}">
+    {{ end }}
+  {{ end }}
+  <div class="container relative z-20 mx-auto">
+    {{ with .title }}
+      <h1 class="text-[2.625rem] leading-[3.125rem] text-white max-w-2xl font-semibold lg:pr-10">{{ . }}</h1>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+

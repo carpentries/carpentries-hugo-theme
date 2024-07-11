@@ -1,0 +1,168 @@
+{{/*
+  ParsePerson
+  Prepare the API data for a person for use in templates
+
+  @author @regisphilibert
+
+  @context Example
+  ```json
+  {
+    "github": "djinnome",
+    "person_name": "Jeremy Zucker",
+    "url": "https://linkedin.com/in/jeremyzucker",
+    "twitter": "djinnome",
+    "orcid": "0000-0002-7276-9009",
+    "lesson_publication_consent": "orcid",
+    "country": "US",
+    "badges": "8,13",
+    "is_maintainer": false,
+    "is_trainer": false,
+    "is_trainer_inactive": false,
+    "is_mentor": true,
+    "is_mentee": false,
+    "is_instructor": true,
+    "gravatar": "71a6b29325a89b9b9643950bdc32a97c"
+  }
+  ```
+  @access private
+
+  @returns Map
+    String (.name)
+    String (.image)
+    String (.term)
+    String (.position)
+    String (.pronouns)
+    []String (.urls)
+      - String (.service)
+        Resource (.icon)
+        String (.url)
+    Map (.country)
+      String (.image)
+      String (.code)
+*/}}
+
+{{ $s := newScratch }}
+{{ $s.Set "data" dict }}
+
+{{ $github_icon := resources.Get "/icons/github-square.svg" }}
+{{ $twitter_icon := resources.Get "/icons/x.svg" }}
+{{ $orcid_icon := resources.Get "/icons/orcid.svg" }}
+{{ $link_icon := resources.Get "/icons/link.svg" }}
+{{ $calendly_icon := resources.Get "/icons/calendly.svg" }}
+{{ $linkedin_icon := resources.Get "/icons/linkedin.svg" }}
+{{ $email_icon := resources.Get "/icons/email.svg" }}
+
+{{ with .person_name }}
+  {{ $s.SetInMap "data" "name" . }}
+{{ end }}
+{{ with .name }}
+  {{ $s.SetInMap "data" "name" . }}
+{{ end }}
+
+{{ range $key := slice "term" "position" "pronouns" }}
+  {{ with index $ $key }}
+    {{ $s.SetInMap "data" $key . }}
+  {{ end }}
+{{ end }}
+
+{{ $image := "" }}
+{{ with .pic }}
+  {{ if in . "." }}
+    {{ $image = . }}
+  {{ end }}
+{{ end }}
+
+{{ with $image }}
+  {{ with partial "func/GetAssetByFilename" . }}
+    {{ $s.SetInMap "data" "image" .RelPermalink }}
+    {{ with $.person_name }}
+      {{ $s.SetInMap "data" "imageAlt" (printf "Profile photo of %s" .) }}
+    {{ end }}
+  {{ end }}
+{{ else }}
+  {{ with .github }}
+    {{ $s.SetInMap "data" "image" (printf "https://avatars.githubusercontent.com/%s" .) }}
+    {{ with $.person_name }}
+      {{ $s.SetInMap "data" "imageAlt" (printf "GitHub profile photo of %s" .) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $urls := slice }}
+{{ with .email }}
+{{ $urls = $urls | append (dict
+  "service" "email"
+  "icon" $email_icon
+  "url" (printf "mailto:%s" .)
+)}}
+{{ end }}
+
+{{ with .github }}
+  {{ $urls = $urls | append (dict
+    "service" "github"
+    "icon" $github_icon
+    "url" (printf "https://github.com/%s" .)
+  )}}
+{{ end }}
+
+{{ with .linkedin }}
+  {{ $urls = $urls | append (dict
+    "service" "linkedin"
+    "icon" $linkedin_icon
+    "url" (printf "https://www.linkedin.com/in/%s" .)
+  )}}
+{{ end }}
+
+{{ with .orcid }}
+  {{ $urls = $urls | append (dict
+    "service" "orcid"
+    "icon" $orcid_icon
+    "url" (printf "https://orcid.org/%s" .)
+  )}}
+{{ end }}
+
+{{ with .twitter }}
+  {{ $urls = $urls | append (dict
+    "service" "twitter"
+    "icon" $twitter_icon
+    "url" (printf "https://twitter.com/%s" .)
+  )}}
+{{ end }}
+
+{{ with .mastodon }}
+  {{ $urls = $urls | append (dict
+    "service" "mastodon"
+    "icon" $link_icon
+    "url" .
+  )}}
+{{ end }}
+
+{{ with .calendly }}
+  {{ $urls = $urls | append (dict
+    "service" "calendly"
+    "icon" $calendly_icon
+    "url" (printf "https://calendly.com/%s" .)
+  )}}
+{{ end }}
+
+{{ with .url }}
+  {{ $urls = $urls | append (dict
+    "service" "custom"
+    "icon" $link_icon
+    "url" .
+  )}}
+{{ end }}
+
+{{ with $urls }}
+  {{ $s.SetInMap "data" "urls" . }}
+{{ end }}
+
+{{ with .country }}
+  {{ $country := dict "code" . }}
+  {{ with resources.Get (printf "flags/%s.svg" (. | lower)) }}
+    {{ $country = merge $country (dict "image" .RelPermalink) }}
+  {{ end }}
+  {{ $s.SetInMap "data" "country" $country }}
+{{ end }}
+
+{{ return $s.Get "data" }}

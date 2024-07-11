@@ -1,0 +1,33 @@
+{{/*
+  ParseCurriculum
+  Prepare the API data for a curriculum for use in templates
+
+  @author @regisphilibert
+
+  @context Example
+    name: Data Carpentry (Ecology with Python)
+    slug: dc-ecology-python
+    description: Our most general purpose workshop. Covers data organization, cleaning,
+      analysis, and plotting (with R or Python). Intended for anyone working with tabular
+      data (data with rows and columns).
+    carpentry: DC
+    active: true
+    mix_match: false
+
+  @access private
+
+  @returns Map
+    String (.name)
+    String (.key)
+    String (.description)
+*/}}
+{{ $s := newScratch }}
+{{ $s.Set "data" dict }}
+
+{{ with .name }}
+  {{ $s.SetInMap "data" "name" . }}
+{{ end }}
+{{ with .id }}
+  {{ $s.SetInMap "data" "key" . }}
+{{ end }}
+{{ return $s.Get "data" }}

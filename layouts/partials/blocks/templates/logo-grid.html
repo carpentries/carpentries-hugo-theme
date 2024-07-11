@@ -1,0 +1,32 @@
+{{ with .block }}
+  <div class="py-16 text-center bg-offwhite">
+    <div class="container mx-auto">
+      <div class="mb-16 max-w-[518px] mx-auto">
+        <h2 class="text-[1.75rem] leading-[2.125rem] text-center font-semibold mt-7 mb-4">Our Supporters</h2>
+        <p class="text-lg text-gray-mid">We are supported by our member organisations, those who sponsor workshops, as well as grants and donations from various sources.</p>
+      </div>
+
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-wrap -mx-2">
+          {{ range .logos }}
+          <div class="flex items-center justify-center w-1/2 px-2 mx-auto mb-5 md:w-1/4">
+            {{ with .url }}
+            <a href="{{ . }}">
+            {{ end }}
+              <img src="{{ .logo }}">
+            {{ with .url }}
+            </a>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+
+      {{ with $cta := .cta }}
+      {{ with .url }}
+        <a class="btn btn-outline mt-7" href="{{ . }}">{{ $cta.copy }}</a>
+      {{ end }}
+    </div>
+  {{ end }}
+  </div>
+{{ end }}

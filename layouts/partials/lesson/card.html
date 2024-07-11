@@ -1,0 +1,46 @@
+{{/*
+  lesson/card
+  Print a list item for a lesson
+
+  @author @regisphilibert
+
+  @context Map
+    see func/ParseLesson@return
+
+*/}}
+<div class="p-8 mb-5 border"
+  {{- range $key, $value := .filters -}}
+    {{- printf `data-%s="%s"` $key $value | safeHTMLAttr -}}
+  {{- end -}}
+>
+  <div class="flex mb-4 -mx-2">
+    {{ with .program }}
+    <div class="flex items-center mx-2 mr-4"> {{ with .image }}<img class="mx-1" src="{{ . }}" alt="">{{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
+    {{ end }}
+    {{ with .language }}
+    <div class="flex items-center mx-2 mr-4"> {{ with .image}} <img class="mx-1" width="20" height="20" class="mr-1" src="/flags/{{ . }}.svg" alt=""> {{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
+    {{ end }}
+    {{ with .tool }}
+      <div class="flex items-center mx-2 mr-4"> {{ with .image }}<img class="mx-1" src="{{ . }}" alt="">{{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
+    {{ end }}
+  </div>
+  {{ with $name := .name }}
+  <h3 class="title text-base md:text-[1.75rem] leading-[2.125rem] font-semibold">
+    {{ with $.url }}
+      <a class="underline hover:text-blue-hover text-gray-dark" href="{{ . }}">{{ $name }}</a>
+    {{ else }}
+      <span class="text-gray-dark">{{ $name }}</span>
+    {{ end }}
+  </h3>
+  {{ end }}
+  {{ with .description}}
+    <div class="description mb-5 text-lg font-semibold text-gray-mid">{{ . }}</div>
+  {{ end }}
+  {{ with .skill }}
+    {{ with .name }}
+      {{ range (split . ", ") }}
+        <div class="inline-block px-2 py-1 mx-2 text-xs text-white rounded-full bg-gray-mid">{{ . }}</div>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+</div>

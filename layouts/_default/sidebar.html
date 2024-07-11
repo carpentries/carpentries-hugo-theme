@@ -1,0 +1,17 @@
+<div>
+  {{ $toc := .Params.hideToc }}
+  {{ with .Content }}
+    {{ if ne $toc true }}
+      {{ partial "widgets/toc" $ }}
+      <hr class="my-8">
+    {{ end }}
+  {{ end }}
+  {{ with .Params.widgets }}
+    {{ partial "widgets/_" $ }}
+  {{ end }}
+  {{ partial "widgets/feedback" . }}
+  <hr class="my-8">
+  {{ partial "widgets/meta" . }}
+  <hr class="my-8">
+  {{ partial "widgets/edit-github" . }}
+</div>

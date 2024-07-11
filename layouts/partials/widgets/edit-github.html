@@ -1,0 +1,6 @@
+{{ with .File }}
+  {{ with .Path }}
+    {{ $url := printf "%s/blob/main/%s" site.Params.git_repo . }}
+    <a class="text-sm font-semibold" href="{{ $url }}" target="_blank">Edit this page on GitHub </a>
+  {{ end }}
+{{ end }}

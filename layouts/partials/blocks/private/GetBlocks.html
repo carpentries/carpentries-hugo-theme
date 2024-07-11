@@ -1,0 +1,43 @@
+{{/*
+  PublicPartialExample
+
+  @author
+
+  @context Map
+    Page (.Page)
+    String (.key)?
+    String (.variant)?
+
+  @return Map[]
+    Map (.block)
+    Page (.page)
+    String (.variant)
+
+  @access private
+
+*/}}
+{{ $return := slice }}
+{{ $blocks := slice }}
+{{ $variant := "" }}
+{{ $key := "blocks" }}
+{{ $Page := $ }}
+{{ if reflect.IsMap $ }}
+  {{ with $.Page }}
+    {{ $Page = . }}
+  {{ end }}
+  {{ with $.variant }}
+    {{ $variant = . }}
+  {{ end }}
+  {{ with $.key }}
+    {{ $key }}
+  {{ end }}
+{{ end }}
+{{ with index $Page.Params $key }}
+  {{ $blocks = . }}
+{{ end }}
+
+{{ range $blocks }}
+  {{ $return = $return | append (dict "block" . "Page" $.Page "variant" $variant) }}
+{{ end }}
+
+{{ return $return }}

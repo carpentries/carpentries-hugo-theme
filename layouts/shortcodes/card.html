@@ -1,0 +1,6 @@
+<div class="">
+  {{ with .Get "title" }}
+    <h3 class="mb-4 text-2xl font-bold not-prose">{{ . }}</h3>
+  {{ end }}
+  <div class="prose">{{ $.Page.RenderString .InnerDeindent }}</div>
+</div>

@@ -1,0 +1,36 @@
+{{ define "main" }}
+  <div class="container px-5 pb-10 mx-auto">
+    {{ partial "breadcrumbs" . }}
+
+    <div class="mb-8">
+      <h1 class="text-[2rem] leading-[2.8125rem] font-semibold">{{ .Title }}</h1>
+      {{ partial "subnav" . }}
+      {{ if eq .Type "post" }}
+      <div class="mt-4">
+        {{ .Render "by-line-inline" }} · {{ .Render "date" }}
+        <div>
+          {{ .Render "tags" }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+    <div
+      x-data="{
+        currentSection: 0,
+        currentSectionTitle: 'First'
+      }"
+    class="relative grid grid-cols-1 gap-8 md:grid-cols-12">
+      <div class="pb-16 md:col-span-9 md:pr-20">
+        <div class="prose h2-wrap max-w-none">
+          {{ .Content }}
+        </div>
+      </div>
+      <div class="relative md:col-span-3">
+        <div class="sticky top-10 sidebar" x-data="{ selected: null }">
+          {{ .Render "sidebar" }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{ end }}

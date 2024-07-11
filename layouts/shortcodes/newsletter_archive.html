@@ -1,0 +1,12 @@
+{{- $feed := "https://feeds.carpentries.org/newsletter.json" -}}
+{{- with partialCached "func/GetFeed" $feed $feed -}}
+{{- with where . "subject" "!=" nil -}}
+<ul>
+  {{- range . -}}
+    <li>
+      <a href="{{- .url -}}">{{- .subject -}}</a>
+    </li>
+  {{- end -}}
+</ul>
+{{- end -}}
+{{- end -}}

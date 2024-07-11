@@ -1,0 +1,91 @@
+{{/*
+  GetFeed
+  Fetch the feed url and return the response filtered if needed.
+
+  @author @regisphilibert
+
+  @context Map (.)
+    String (.endpoint)
+    String (.where)
+
+  @access private
+
+  @returns Slice | Map
+
+  @example - Go Template
+  {{ with partial "func/GetFeed" (dict
+    "endpoint" "https://feeds.carpentries.org/all_badged_people.json"
+    "where" "is_instructor,true") }}
+    {{ $data = . }}
+  {{ end }}
+*/}}
+
+{{ $url := . }}
+{{ $args := dict }}
+{{/* We need to build the arguments object */}}
+{{ if reflect.IsMap . }}
+  {{ with .endpoint }}
+    {{ $args = merge $args (dict "endpoint" .) }}
+  {{ end }}
+  {{ with .where }}
+    {{ $args = merge $args (dict "where" .) }}
+  {{ end }}
+{{ else }}
+ {{ $args = dict "endpoint" . }}
+{{ end }}
+
+{{ $data := slice }}
+{{ if (in $args.endpoint "http") }}
+  {{ with resources.GetRemote $args.endpoint }}
+    {{ with .Err }}
+      {{ errorf "%s" . }}
+    {{ else }}
+      {{ $data = .Content | transform.Unmarshal }}
+    {{ end }}
+  {{ else }}
+    {{ errorf "Unable to get remote resource %q" $url }}
+  {{ end }}
+{{ else }}
+  {{ $location := index site.Data $args.endpoint }}
+  {{ if in $args.endpoint "." }}
+    {{ $paths := split $args.endpoint "." }}
+
+    {{ if eq (len $paths) 2 }}
+      {{ $location = index site.Data (index $paths 0) (index $paths 1) }}
+    {{ end }}
+    {{ if eq (len $paths) 3 }}
+      {{ $location = index site.Data (index $paths 0) (index $paths 1) (index $paths 2) }}
+    {{ end }}
+  {{ end }}
+  {{ with $location}}
+    {{ $data = . }}
+  {{ end }}
+{{ end }}
+
+{{/* if a where is set and the response data is a slice, we retrieve the key and value */}}
+{{ if reflect.IsSlice $data }}
+  {{ with $args.where }}
+    {{ $params := split . "|" }}
+    {{ range $params }}
+      {{ $cond := strings.Trim . " " }}
+      {{ $cond = split . "," }}
+      {{ $key := index $cond 0 }}
+      {{ $key = strings.Trim $key " " }}
+      {{ $value := true }}
+      {{ if isset $cond 1 }}
+        {{/* We handle false positive from the parameter string type */}}
+        {{ $value = index $cond 1 }}
+        {{ $value = strings.Trim $value " " }}
+        {{ if eq $value "false" }}
+          {{ $value = false }}
+        {{ end }}
+        {{ if eq $value "true" }}
+          {{ $value = true }}
+        {{ end }}
+      {{ end }}
+      {{/* And apply the filtering */}}
+      {{ $data = where $data $key $value }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $data }}
