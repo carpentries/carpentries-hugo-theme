@@ -59,12 +59,10 @@
       </div>
       <div class="relative md:col-span-4">
         <div class="sticky top-10 sidebar">
-          {{ if (not (isset .Params "lesson_program")) | or (eq .Params.lesson_program "") }}
-            {{ partial "filters" (dict
-              "filters" $filtersData.filters
-              "placeholder" "Search workshops"
-            ) }}
-          {{ end }}
+          {{ partial "filters" (dict
+            "filters" $filtersData.filters
+            "placeholder" "Search workshops"
+          ) }}
           {{ .Render "sidebar" }}
         </div>
       </div>
