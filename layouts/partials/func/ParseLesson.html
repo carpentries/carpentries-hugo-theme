@@ -71,6 +71,7 @@
         {{ $outputObject := dict
           "name" $output
           "key" $output
+          "id" $value
         }}
 
         {{ $s.SetInMap "data" $key $outputObject }}

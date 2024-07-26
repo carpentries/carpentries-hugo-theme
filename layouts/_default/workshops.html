@@ -12,6 +12,13 @@
 
   {{ with .Params.data_source }}
     {{ $entries = partialCached "func/GetWorkshops" . . }}
+
+    {{ with $.Params.lesson_program }}
+      {{ with where $entries "type.id" . }}
+        {{ $entries = . }}
+      {{ end }}
+    {{ end }}
+
     {{ $filtersArgs := dict
       "entries" $entries
       "filters" (slice
@@ -52,10 +59,12 @@
       </div>
       <div class="relative md:col-span-4">
         <div class="sticky top-10 sidebar">
-          {{ partial "filters" (dict
-            "filters" $filtersData.filters
-            "placeholder" "Search workshops"
+          {{ if (not (isset .Params "lesson_program")) | or (eq .Params.lesson_program "") }}
+            {{ partial "filters" (dict
+              "filters" $filtersData.filters
+              "placeholder" "Search workshops"
             ) }}
+          {{ end }}
           {{ .Render "sidebar" }}
         </div>
       </div>
