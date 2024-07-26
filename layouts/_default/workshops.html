@@ -16,6 +16,11 @@
     {{ with $.Params.lesson_program }}
       {{ with where $entries "type.id" . }}
         {{ $entries = . }}
+        <style>
+          select[name="type"]{
+            display: none;
+          }
+        </style>
       {{ end }}
     {{ end }}
 
