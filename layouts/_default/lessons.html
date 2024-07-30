@@ -50,6 +50,11 @@
     {{ partial "subnav" . }}
     <div id="filter" class="relative grid grid-cols-1 gap-8 md:grid-cols-12">
       <div class="pb-16 md:col-span-8 pro">
+        {{ with .Content}}
+          <div class="mb-10 prose h2-wrap max-w-none">
+            {{ . }}
+          </div>
+        {{ end }}
         {{ .Render "list-feedback" }}
         <div class="filtered">
           {{ range $entries }}
