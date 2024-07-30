@@ -98,54 +98,62 @@
   {{ $s.SetInMap "data" "tags" . }}
   {{/* Type is Software if... */}}
   {{ if in $tags "SWC" }}
-    {{ $s.SetInMap "data" "program" (dict
-      "id" "SWC"
-      "key" "software"
-      "name" "Software Carpentry"
-      "image" "/software.svg"
-    ) }}
+    {{ $args := dict
+      "key" "swc"
+      "taxonomy" "program"
+    }}
+    {{ with partialCached "func/GetTaxonomyData" $args $args }}
+      {{ $s.SetInMap "data" "program" . }}
+    {{ end }}
   {{/* Type is Data if... */}}
   {{ else if in $tags "DC" }}
-    {{ $s.SetInMap "data" "program" (dict
-      "id" "DC"
-      "key" "data"
-      "name" "Data Carpentry"
-      "image" "/data.svg"
-    ) }}
+    {{ $args := dict
+      "key" "dc"
+      "taxonomy" "program"
+    }}
+    {{ with partialCached "func/GetTaxonomyData" $args $args }}
+      {{ $s.SetInMap "data" "program" . }}
+    {{ end }}
   {{/* Type is Library if... */}}
   {{ else if in $tags "LC" }}
-    {{ $s.SetInMap "data" "program" (dict
-      "id" "LC"
-      "key" "library"
-      "name" "Library Carpentry"
-      "image" "/library.svg"
-    ) }}
+    {{ $args := dict
+      "key" "lc"
+      "taxonomy" "program"
+    }}
+    {{ with partialCached "func/GetTaxonomyData" $args $args }}
+      {{ $s.SetInMap "data" "program" . }}
+    {{ end }}
   {{/* Type is The Carpentries if... */}}
   {{ else if in $tags "Circuits" }}
-    {{ $s.SetInMap "data" "program" (dict
-      "id" "Circuits"
-      "key" "carpentries"
-      "name" "The Carpentries"
-      "image" "/carpentries.svg"
-    ) }}
+    {{ $args := dict
+      "key" "circuits"
+      "taxonomy" "program"
+    }}
+    {{ with partialCached "func/GetTaxonomyData" $args $args }}
+      {{ $s.SetInMap "data" "program" . }}
+    {{ end }}
   {{ end }}
 
   {{/* For meeting, we use the same source */}}
 
   {{/* Meeing is In Person if... */}}
   {{ if in $tags "online" }}
-    {{ $s.SetInMap "data" "meeting" (dict
+    {{ $args := dict
       "key" "online"
-      "name" "Online"
-      "image" "/Online.svg"
-    ) }}
+      "taxonomy" "meeting"
+    }}
+    {{ with partialCached "func/GetTaxonomyData" $args $args }}
+      {{ $s.SetInMap "data" "meeting" . }}
+    {{ end }}
   {{/* Else, Meeting is Online */}}
   {{ else }}
-    {{ $s.SetInMap "data" "meeting" (dict
-      "key" "in-person"
-      "name" "In Person"
-      "image" "/In-Person.svg"
-    ) }}
+    {{ $args := dict
+      "key" "online"
+      "taxonomy" "in-person"
+    }}
+    {{ with partialCached "func/GetTaxonomyData" $args $args }}
+      {{ $s.SetInMap "data" "meeting" . }}
+    {{ end }}
   {{ end }}
 {{ end }}
 
@@ -154,22 +162,16 @@
 */}}
 {{ $country := dict }}
 {{ with $code := .country }}
-  {{ with where site.Data.country_codes "iso2c" . }}
-    {{ with index . 0 }}
-      {{ $country = dict
-        "key" (lower $code)
-        "name" .country_name
-        "image" (lower $code)
-      }}
-    {{ end }}
+  {{ $args := dict
+    "key" (lower $code)
+    "taxonomy" "language"
+  }}
+  {{ with partialCached "func/GetTaxonomyData" $args $args }}
+    {{ $s.SetInMap "data" "country" . }}
+  {{ else }}
+    {{ $s.SetInMap "data" "country" dict }}
   {{ end }}
 {{ end }}
-{{ with $country }}
-  {{ $s.SetInMap "data" "country" . }}
-{{ else }}
-  {{ $s.SetInMap "data" "country" dict  }}
-{{ end }}
-
 {{/* For the curriculum we need to pair the curriculum key stored in `.curriculum` with a name found at https://feeds.carpentries.org/amy_curricula.json.
   So we can return a map similar to Type and Meeting (key, name)
 */}}
@@ -196,8 +198,8 @@
   {{ with .program }}
     {{ $s.SetInMap "filters" "program" .name }}
   {{ end }}
-
 {{ end }}
+
 {{ with $s.Get "filters" }}
   {{ $s.SetInMap "data" "filters" . }}
 {{ end }}
