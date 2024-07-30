@@ -193,8 +193,8 @@
   {{ with .curriculum }}
     {{ $s.SetInMap "filters" "curriculum" .name }}
   {{ end }}
-  {{ with .type }}
-    {{ $s.SetInMap "filters" "type" .name }}
+  {{ with .program }}
+    {{ $s.SetInMap "filters" "program" .name }}
   {{ end }}
 
 {{ end }}
