@@ -14,10 +14,10 @@
     {{ $entries = partialCached "func/GetWorkshops" . . }}
 
     {{ with $.Params.lesson_program }}
-      {{ with where $entries "type.id" . }}
+      {{ with where $entries "program.id" . }}
         {{ $entries = . }}
         <style>
-          select[name="type"]{
+          select[name="program"]{
             display: none;
           }
         </style>
@@ -40,7 +40,7 @@
           "label" "Curriculum"
         )
         (dict
-          "key" "type"
+          "key" "program"
           "label" "Lesson Program"
         )
       )
