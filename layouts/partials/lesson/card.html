@@ -18,7 +18,7 @@
     <div class="flex items-center mx-2 mr-4"> {{ with .image }}<img class="mx-1" src="{{ . }}" alt="">{{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
     {{ end }}
     {{ with .language }}
-    <div class="flex items-center mx-2 mr-4"> {{ with .image}} <img class="mx-1" width="20" height="20" class="mr-1" src="/flags/{{ . }}.svg" alt=""> {{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
+    <div class="flex items-center mx-2 mr-4"> {{ with .image}} <img class="mx-1" width="20" height="20" class="mr-1" src="{{ . }}" alt=""> {{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
     {{ end }}
     {{ with .tool }}
       <div class="flex items-center mx-2 mr-4"> {{ with .image }}<img class="mx-1" src="{{ . }}" alt="">{{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>

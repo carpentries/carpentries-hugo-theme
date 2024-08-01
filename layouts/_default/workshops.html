@@ -12,6 +12,18 @@
 
   {{ with .Params.data_source }}
     {{ $entries = partialCached "func/GetWorkshops" . . }}
+
+    {{ with $.Params.lesson_program }}
+      {{ with where $entries "program.id" . }}
+        {{ $entries = . }}
+        <style>
+          select[name="program"]{
+            display: none;
+          }
+        </style>
+      {{ end }}
+    {{ end }}
+
     {{ $filtersArgs := dict
       "entries" $entries
       "filters" (slice
@@ -28,7 +40,7 @@
           "label" "Curriculum"
         )
         (dict
-          "key" "type"
+          "key" "program"
           "label" "Lesson Program"
         )
       )
@@ -42,6 +54,11 @@
     {{ $countries := slice }}
     <div id="filter" class="relative grid grid-cols-1 gap-8 md:grid-cols-12">
       <div class="pb-16 md:col-span-8 pro">
+        {{ with .Content}}
+          <div class="mb-10 prose h2-wrap max-w-none">
+            {{ . }}
+          </div>
+        {{ end }}
         {{ .Render "list-feedback" }}
         <div class="filtered">
           {{ range $entries }}
@@ -55,7 +72,7 @@
           {{ partial "filters" (dict
             "filters" $filtersData.filters
             "placeholder" "Search workshops"
-            ) }}
+          ) }}
           {{ .Render "sidebar" }}
         </div>
       </div>

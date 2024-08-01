@@ -8,17 +8,18 @@
     Map (.block)
       String (.title)
       String (.image)
+      String (.text_color)
 */}}
 {{ with .block }}
-<div class="relative pt-40 pb-36">
+<div class="relative py-24 md:pt-40 md:pb-36">
   {{ with .image }}
     {{ with resources.Get . }}
-    <img class="absolute inset-0 object-fill w-full h-full brightness-[.85] z-10" src="{{ .RelPermalink }}">
+    <img class="absolute inset-0 object-cover w-full h-full brightness-[.85] z-10" src="{{ .RelPermalink }}">
     {{ end }}
   {{ end }}
-  <div class="container relative z-20 mx-auto">
+  <div class="container relative z-20 mx-auto {{ if eq .text_color "white" }}text-white{{ end }}">
     {{ with .title }}
-      <h1 class="text-[2.625rem] leading-[3.125rem] text-white max-w-2xl font-semibold lg:pr-10">{{ . }}</h1>
+      <h1 class="text-3xl md:text-[2.625rem] md:leading-[3.125rem] max-w-2xl font-semibold lg:pr-10">{{ . }}</h1>
     {{ end }}
   </div>
 </div>

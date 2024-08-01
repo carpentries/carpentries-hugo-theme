@@ -37,20 +37,6 @@
 {{ $s := newScratch }}
 {{ $s.Set "data" dict }}
 {{ $s.Set "filters" dict }}
-{{ $replaces := slice
-  (dict
-    "from" "SWC"
-    "to" "Software Carpentry"
-  )
-  (dict
-    "from" "DC"
-    "to" "Data Carpentry"
-  )
-  (dict
-    "from" "LC"
-    "to" "Library Carpentry"
-  )
-}}
 {{ range $key, $value := . }}
   {{ if in (slice "language" "program" "tool" "skill") $key }}
     {{ with $value }}
@@ -65,13 +51,18 @@
       {{ end }}
       {{ with delimit $output ", "}}
         {{ $output = . }}
-        {{ range $replaces }}
-          {{ $output = replace $output .from .to }}
-        {{ end }}
         {{ $outputObject := dict
           "name" $output
           "key" $output
+          "id" $value
         }}
+        {{ $args := dict
+          "key" $value
+          "taxonomy" $key
+        }}
+        {{ with partialCached "func/GetTaxonomyData" $args $args }}
+          {{ $outputObject = . }}
+        {{ end }}
 
         {{ $s.SetInMap "data" $key $outputObject }}
         {{ $s.SetInMap "filters" $key $output }}

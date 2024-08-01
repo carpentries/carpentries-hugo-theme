@@ -1,0 +1,33 @@
+{{/*
+  GetTaxonomyData
+  Retrieve information about a certain taxonomy with a given ID.
+
+  @author @regisphilibert
+
+  @context String (.)
+
+  @access private
+
+  @returns Map
+    String (.key)
+    String (.name)
+    String (.image)
+
+  @uses
+     - partial func/GetTaxonomyMapping
+*/}}
+{{ $entry := "" }}
+{{ $taxonomy := .taxonomy | default "program" }}
+{{ $key := .key }}
+{{ $mapping := partialCached "func/GetTaxonomyMapping" "GetTaxonomyMapping" }}
+
+{{ $entry := "" }}
+{{ with .key }}
+  {{ $key := printf "%s-%s" $taxonomy (lower .)}}
+  {{ with index $mapping $key }}
+    {{ $entry = . }}
+  {{ end }}
+{{ end }}
+
+
+{{ return $entry }}

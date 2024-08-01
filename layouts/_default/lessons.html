@@ -8,7 +8,19 @@
 {{ end }}
 {{ define "main" }}
   {{ $entries := slice }}
+
   {{ $entries = partialCached "func/GetLessons" "GetLessons" }}
+
+  {{ with .Params.lesson_program }}
+    {{ with where $entries "program.id" . }}
+      {{ $entries = . }}
+      <style>
+        select[name="program"]{
+          display: none;
+        }
+      </style>
+    {{ end }}
+  {{ end }}
   {{ $filtersArgs := dict
     "entries" $entries
     "filters" (slice
@@ -38,6 +50,11 @@
     {{ partial "subnav" . }}
     <div id="filter" class="relative grid grid-cols-1 gap-8 md:grid-cols-12">
       <div class="pb-16 md:col-span-8 pro">
+        {{ with .Content}}
+          <div class="mb-10 prose h2-wrap max-w-none">
+            {{ . }}
+          </div>
+        {{ end }}
         {{ .Render "list-feedback" }}
         <div class="filtered">
           {{ range $entries }}
@@ -48,10 +65,10 @@
       </div>
       <div class="relative md:col-span-4">
         <div class="sticky top-10">
-          {{ partial "filters" (dict
-            "filters" $filtersData.filters
-            "placeholder" "Search lessons"
-          ) }}
+            {{ partial "filters" (dict
+              "filters" $filtersData.filters
+              "placeholder" "Search lessons"
+            ) }}
           {{ .Render "sidebar" }}
         </div>
       </div>

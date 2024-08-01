@@ -14,11 +14,11 @@
   {{- end -}}
 >
   <div class="flex mb-4 -mx-2">
-    {{ with .type }}
+    {{ with .program }}
     <div class="flex items-center mx-2"> {{ with .image }}<img class="mx-1" src="{{ . }}" alt="">{{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
     {{ end }}
     {{ with .country }}
-    <div class="flex items-center mx-2"> {{ with .image }}<img class="mx-1" width="20" height="20" class="mr-1" src="/flags/{{ . }}.svg" alt="">{{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
+    <div class="flex items-center mx-2"> {{ with .image }}<img class="mx-1" width="20" height="20" class="mr-1" src="{{ . }}" alt="">{{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>
     {{ end }}
     {{ with .meeting }}
       <div class="flex items-center mx-2"> {{ with .image }}<img class="mx-1" src="{{ . }}" alt="">{{ end }} <span class="text-[0.625rem] uppercase">{{ .name }}</span></div>

@@ -4,11 +4,11 @@
       <div class="flex flex-col items-center md:justify-start md:flex-row" :class="open ? 'h-auto' : 'h-10 overflow-hidden'">
         {{ range site.Menus.top }}
           {{ $active := false }}
-          {{ $class := printf "px-4 py-[10px] font-bold text-sm hover:underline md:first:bg-gray-light md:first:text-blue-mid %s" (cond $active "bg-white text-blue-900" "default") }}
-          {{ $aria_current := "page" }}
-          {{- if or ($.IsMenuCurrent .Menu .) ($.HasMenuCurrent .Menu .) }}
+          {{ with .Params.active }}
             {{ $active = true }}
-          {{- end }}
+          {{ end }}
+          {{ $class := printf "px-4 py-[10px] font-bold text-sm hover:underline %s" (cond $active "bg-white text-blue-900" "default") }}
+          {{ $aria_current := "page" }}
           <a href="{{ .URL }}" aria-current="{{ cond $active true "page" }}" class="{{ $class }}">{{ .Name }}</a>
         {{ end }}
       </div>
@@ -18,7 +18,7 @@
   <div class="py-4 bg-gray-light" x-data="{ mobileOpen: false, activeDropdown: null }" @click.outside="activeDropdown = null">
     <div class="container relative flex px-5 mx-auto">
       <div class="w-40">
-        <a href="/"><img width="156" height="33" class="max-w-[117px] md:max-w-none" src="/carpentries-logo.svg" alt="The Carpentries"></a>
+        <a href="/"><img class="max-w-[117px] md:max-w-[156px]" src="/{{ site.Params.logo }}" alt="{{ site.Params.logoAlt }}"></a>
       </div>
       <div class="flex justify-end flex-1 lg:hidden">
         <button class="flex items-center navbar-toggler" :aria-expanded="mobileOpen ? 'true' : 'false'" x-on:click="mobileOpen = ! mobileOpen">

@@ -1,0 +1,75 @@
+{{/*
+  GetTaxonomyMapping
+  Generate a map of all taxonomy data. This is mostly so data can be cached throuhout build.
+
+  @author @regisphilibert
+
+  @context String (.id)
+
+  @access private
+
+  @returns Map[String]
+    String (.key)
+    String (.name)
+    String (.image)
+
+  @example
+  {{ $args := dict
+    "key" "UK"
+    "taxonomy" "language"
+  }}
+  {{ with partialCached "func/GetTaxonomyData" $args $args }}
+    {{ $s.SetInMap "data" "country" . }}
+  {{ end }}
+
+*/}}
+
+{{ $s := newScratch }}
+
+{{ $mapping := dict
+  "meeting-online" (dict
+    "key" "online"
+    "name" "Online"
+    "image" "/Online.svg"
+  )
+  "meeting-in-person" (dict
+    "key" "in-person"
+    "name" "In Person"
+    "image" "/In-Person.svg"
+  )
+  "program-swc" (dict
+    "id" "SWC"
+    "key" "software"
+    "name" "Software Carpentry"
+    "image" "/software.svg"
+  )
+  "program-dc" (dict
+    "id" "DC"
+    "key" "data"
+    "name" "Data Carpentry"
+    "image" "/data.svg"
+  )
+  "program-lc" (dict
+    "id" "LC"
+    "key" "library"
+    "name" "Library Carpentry"
+    "image" "/library.svg"
+  )
+  "program-circuits" (dict
+    "id" "Circuits"
+    "key" "carpentries"
+    "name" "The Carpentries"
+    "image" "/carpentries.svg"
+  )
+}}
+{{ $s.Set "mapping" $mapping }}
+
+{{ range site.Data.country_codes }}
+  {{ $s.SetInMap "mapping" (printf "language-%s" (lower .iso2c)) (dict
+    "key" (lower .iso2c)
+    "name" .country_name
+    "image" (printf "/flags/%s.svg" (lower .iso2c))
+  ) }}
+{{ end }}
+
+{{ return $s.Get "mapping" }}
