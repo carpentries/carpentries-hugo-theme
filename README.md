@@ -4,7 +4,8 @@
 
 Styling is handled by [Tailwind](https://tailwindcss.com/)
 
-
+## Dependencies
+Go Version 1.18
 
 ## Installation
 
@@ -50,3 +51,39 @@ build:
 4. run `hugo serve` to navigate your project locally
 
 
+## Maintenance
+
+### Maintain theme on your local machine
+
+To locally work on theme one should go into the project’s own `go.mod` file and add this line at the end:
+
+```diff
+module github.com/theNewDynamic/carpentries-project
+
+go 1.18
+
+require github.com/carpentries/carpentries-hugo-theme v0.0.0-20240530145900-caf8617804d0 // indirect
+
+++ replace github.com/carpentries/carpentries-hugo-theme => /Users/username/path/to/dir/carpentries-hugo-theme
+```
+
+This will use your local directory on the project instead of the remote module. Now this is ok but you have to be careful not to commit this. Or
+
+1. It will fail on everyone else machine including CI
+2. We will look like amateurs 🤪
+
+There is an other solution documented [here](https://gohugo.io/hugo-modules/configuration/#module-configuration-top-level) under “replacements”.
+
+### Syncing the project with latest theme
+
+Once theme changes have been pushed to the theme's repo, one need to make sure the project runs the latest version of the theme.
+
+1. To do that one needs to go the project’s directory, and run from there the following:
+
+    ```diff
+    hugo mod get -u github.com/carpentries/carpentries-hugo-theme
+    ```
+
+    This should update the `go.mod` and `go.sum` files.
+
+2. Changes to those two files can now safely be commited
