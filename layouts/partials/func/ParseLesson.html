@@ -63,9 +63,8 @@
         {{ with partialCached "func/GetTaxonomyData" $args $args }}
           {{ $outputObject = . }}
         {{ end }}
-
         {{ $s.SetInMap "data" $key $outputObject }}
-        {{ $s.SetInMap "filters" $key $output }}
+        {{ $s.SetInMap "filters" $key $outputObject.name }}
       {{ end }}
     {{ end }}
   {{ else }}

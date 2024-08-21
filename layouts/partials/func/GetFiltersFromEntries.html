@@ -65,6 +65,17 @@
       {{ else }}
         {{ $output = slice $value }}
       {{ end }}
+      {{/* Have to make an exception for Program to retrieve the full name if
+      matches what's held in the GetTaxonomyData function... */}}
+      {{ if eq $key "program" }}
+        {{ $args := dict
+          "key" $value
+          "taxonomy" "program"
+        }}
+        {{ with partialCached "func/GetTaxonomyData" $args $args }}
+          {{ $output = slice .name }}
+        {{ end }}
+      {{ end }}
       {{/* We always expect an array */}}
       {{ range $output }}
         {{ $s.Add $key . }}
