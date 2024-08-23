@@ -1,0 +1,20 @@
+{{/*
+  blocks/text
+
+  @context Map (.)
+    Page (.Page)
+    Map (.block)
+      String (.title)
+      String (.copy)
+
+*/}}
+{{ with .block }}
+<div class="container px-5 py-16 mx-auto prose">
+  <h3>{{ .title }}</h3>
+  {{ with .copy }}
+    <div>
+      {{ $.Page.RenderString . }}
+    </div>
+  {{ end }}
+</div>
+{{ end }}
