@@ -1,5 +1,5 @@
 {{ with .Params.lastmod }}
-  <div class="text-xs font-semibold">
+  <div class="text-sm font-semibold">
     Last edited: {{ dateFormat (site.Params.date_format_with_time | default "2 April, 2006") . }}
   </div>
   <hr class="my-8">
