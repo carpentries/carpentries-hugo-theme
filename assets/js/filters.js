@@ -56,13 +56,17 @@ document.addEventListener(documentLoad, function() {
   filterSelects.forEach(select => {
     const filterKey = select.getAttribute('name')
     select.addEventListener("change", function() {
+
       if(!filters[filterKey].includes(this.value)) {
         filters[filterKey] = ""
         filters[filterKey] = this.value
         userList.filter((item) => {
           for (const atFilter in filters) {
             if(!!filters[atFilter]) {
-              if(!!item.values()[atFilter] && item.values()[atFilter].includes(filters[atFilter])) {
+              if(filters[atFilter] == "none") {
+                continue
+              }
+              else if(!!item.values()[atFilter] && item.values()[atFilter].includes(filters[atFilter])) {
                 continue
               } else {
                 return false
