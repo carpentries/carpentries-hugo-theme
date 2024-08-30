@@ -68,7 +68,7 @@
   {{ $s.SetInMap "mapping" (printf "language-%s" (lower .iso2c)) (dict
     "key" (lower .iso2c)
     "name" .country_name
-    "image" (printf "/flags/%s.svg" (lower .iso2c))
+    "image" (printf "/flags/%s.png" (lower .iso2c))
   ) }}
 {{ end }}
 
