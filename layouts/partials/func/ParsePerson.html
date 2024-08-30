@@ -85,6 +85,13 @@
     {{ with $.person_name }}
       {{ $s.SetInMap "data" "imageAlt" (printf "GitHub profile photo of %s" .) }}
     {{ end }}
+  {{ else }}
+    {{ with .gravatar }}
+      {{ $s.SetInMap "data" "image" (printf "https://www.gravatar.com/avatar/%s?d=mp" . ) }}
+      {{ with $.person_name }}
+        {{ $s.SetInMap "data" "imageAlt" (printf "Gravatar profile photo of %s" .) }}
+      {{ end }}
+    {{ end }}
   {{ end }}
 {{ end }}
 
