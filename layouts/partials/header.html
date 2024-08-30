@@ -9,7 +9,14 @@
           {{ end }}
           {{ $class := printf "px-4 py-[10px] font-bold text-sm hover:underline %s" (cond $active "bg-white text-blue-900" "default") }}
           {{ $aria_current := "page" }}
-          <a href="{{ .URL }}" aria-current="{{ cond $active true "page" }}" class="{{ $class }}">{{ .Name }}</a>
+          <div class="md:hidden">
+            {{ if $active }}
+            <button class="inline-block h-10" x-on:click="open = ! open">{{ .Name }}</button>
+            {{ else }}
+            <a href="{{ .URL }}" aria-current="{{ cond $active true "page" }}" class="{{ $class }} h-10 inline-block">{{ .Name }}</a>
+            {{ end }}
+          </div>
+          <a href="{{ .URL }}" aria-current="{{ cond $active true "page" }}" class="{{ $class }} hidden md:inline-block">{{ .Name }}</a>
         {{ end }}
       </div>
     </div>
