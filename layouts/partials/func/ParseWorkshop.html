@@ -148,8 +148,8 @@
   {{/* Else, Meeting is Online */}}
   {{ else }}
     {{ $args := dict
-      "key" "online"
-      "taxonomy" "in-person"
+      "key" "in-person"
+      "taxonomy" "meeting"
     }}
     {{ with partialCached "func/GetTaxonomyData" $args $args }}
       {{ $s.SetInMap "data" "meeting" . }}
