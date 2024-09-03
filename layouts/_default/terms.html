@@ -18,7 +18,7 @@
                 {{ range . }}
                   <li>
                     <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                    <p class="not-prose"><time datetime="{{ .Date }}">{{ .Date.Format (site.Params.date_format | default "2 April, 2006") }}</time></p>
+                    <p class="not-prose"><time datetime="{{ .Date }}">{{ .Date.Format (site.Params.date_format | default "2 January, 2006") }}</time></p>
                   </li>
                 {{ end }}
               </ul>
