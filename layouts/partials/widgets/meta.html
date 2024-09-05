@@ -1,6 +1,6 @@
 {{ with .Lastmod }}
   <div class="text-sm font-semibold">
-    Last edited: {{ dateFormat (site.Params.date_format_with_time | default "2 January, 2006") . }}
+    Last edited: {{ dateFormat (site.Params.date_format | default "2 January, 2006") . }}
   </div>
   <hr class="my-8">
 {{ end }}
