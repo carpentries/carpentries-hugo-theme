@@ -1,7 +1,7 @@
 <header class="">
   <div class="text-white bg-blue-mid" x-data="{ open: false }">
     <div class="container px-5 mx-auto">
-      <div class="flex flex-col items-center md:justify-start md:flex-row" :class="open ? 'h-auto' : 'h-10 overflow-hidden'">
+      <div class="grid items-center grid-cols-1 text-center md:justify-start md:flex md:flex-row" :class="open ? 'h-auto' : 'h-10 overflow-hidden'">
         {{ range site.Menus.top }}
           {{ $active := false }}
           {{ with .Params.active }}
@@ -9,7 +9,7 @@
           {{ end }}
           {{ $class := printf "px-4 py-[10px] font-bold text-sm hover:underline %s" (cond $active "bg-white text-blue-900" "default") }}
           {{ $aria_current := "page" }}
-          <div class="md:hidden">
+          <div class="{{ with .Params.active }}order-1{{ else }}order-2{{ end }} md:hidden">
             {{ if $active }}
             <button class="inline-block h-10" x-on:click="open = ! open">{{ .Name }}</button>
             {{ else }}
