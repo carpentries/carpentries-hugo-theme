@@ -87,3 +87,7 @@ Once theme changes have been pushed to the theme's repo, one need to make sure t
     This should update the `go.mod` and `go.sum` files.
 
 2. Changes to those two files can now safely be commited
+
+### Documentation 
+
+Documentation about this theme's features is included in [this repo's wiki](https://github.com/carpentries/carpentries-hugo-theme/wiki).
