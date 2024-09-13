@@ -1,4 +1,4 @@
-# Theme Name
+# The Carpentries Hugo Theme
 
 ## Features
 
