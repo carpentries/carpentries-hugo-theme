@@ -1,13 +1,13 @@
 {{/* styles */}}
 {{ $options := dict "inlineImports" true }}
 {{ $styles := resources.Get "css/styles.css" }}
-{{ $styles = $styles | resources.PostCSS $options }}
+{{ $styles = $styles | css.PostCSS $options }}
 {{ if not hugo.IsServer }}
   {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
 {{ end }}
 {{ with resources.Get "/icons/arrow-right-white.svg" }}
   {{ .Publish }}
-{{ end }}
+{{ end }} 
 {{ with resources.Match "/images/blob-*" }}
   {{ range . }}
     {{ .Publish }}
