@@ -21,7 +21,7 @@
     <strong>{{ .committee_name }}</strong>
     <ul>
       {{ with .chair }}
-      <li><strong>Chair: </strong>{{ . }}</li>
+      <li>{{ . }} (Chair)</li>
       {{ end }}
       {{ with .members }}
         {{ range . }}
