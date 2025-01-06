@@ -51,6 +51,7 @@
 {{ $calendly_icon := resources.Get "/icons/calendly.svg" }}
 {{ $linkedin_icon := resources.Get "/icons/linkedin.svg" }}
 {{ $email_icon := resources.Get "/icons/email.svg" }}
+{{ $mastodon_icon := resources.Get "/icons/mastodon.svg"}}
 
 {{ with .person_name }}
   {{ $s.SetInMap "data" "name" . }}
@@ -139,7 +140,7 @@
 {{ with .mastodon }}
   {{ $urls = $urls | append (dict
     "service" "mastodon"
-    "icon" $link_icon
+    "icon" $mastodon_icon
     "url" .
   )}}
 {{ end }}
