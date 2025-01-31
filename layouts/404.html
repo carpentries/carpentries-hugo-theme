@@ -6,10 +6,19 @@
   <div class="prose">
     <p>The page you requested cannot be found.</p>
     <p>Maybe the webpage was moved or deleted; or did you maybe mistype the link?</p>
+
+    {{ if .Site.Params.include404search }}
     <p>Try…</p>
     <p>…to start over on the <a href="{{ .Site.Home.RelPermalink }}">home page</a></p>
     <p>…to <a href="/search">search</a></p>
     <p>If you cannot find it, <a href="https://carpentries.org/about-us/contact/">ask us about it</a>. </p>
+
+    {{ else }}
+    <p>Try to start over on the <a href="{{ .Site.Home.RelPermalink }}">home page</a>.</p>
+
+    <p>If you cannot find it, <a href="https://carpentries.org/about-us/contact/">ask us about it</a>. </p>
+    {{ end }}
+
   </div>
 </div>
 {{ end }}
