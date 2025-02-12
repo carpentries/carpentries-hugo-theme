@@ -23,6 +23,7 @@ module.exports = (theme) => ({
     'dark':'#081457'
   },
   offwhite: '#FFF7F1',
+  golden: 'FFC700',
   gray: {
     'light': '#F8F8F8',
     'mid': '#585858',
