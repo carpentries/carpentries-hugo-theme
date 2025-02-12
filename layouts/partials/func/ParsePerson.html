@@ -52,6 +52,7 @@
 {{ $linkedin_icon := resources.Get "/icons/linkedin.svg" }}
 {{ $email_icon := resources.Get "/icons/email.svg" }}
 {{ $mastodon_icon := resources.Get "/icons/mastodon.svg"}}
+{{ $bluesky_icon := resources.Get "/icons/bluesky.svg"}}
 
 {{ with .person_name }}
   {{ $s.SetInMap "data" "name" . }}
@@ -142,6 +143,14 @@
     "service" "mastodon"
     "icon" $mastodon_icon
     "url" .
+  )}}
+{{ end }}
+
+{{ with .bluesky }}
+  {{ $urls = $urls | append (dict
+    "service" "bluesky"
+    "icon" $bluesky_icon
+    "url" (printf "https://bsky.app/profile/%s" .)
   )}}
 {{ end }}
 
