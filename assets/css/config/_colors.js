@@ -32,6 +32,9 @@ module.exports = (theme) => ({
   red: {
     'bright': '#FF4955'
   },
+  buttercup: '#FFF7F1',
+  green: '#205959',
+
   secondary: {
     ...colors.slate,
   }
