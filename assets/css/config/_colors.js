@@ -20,7 +20,8 @@ module.exports = (theme) => ({
     'bright': '#0044D7',
     'mid': '#002B66',
     'hover': '#0a58ca',
-    'dark':'#081457'
+    'dark':'#081457',
+    'midnight': '#001483'
   },
   offwhite: '#FFF7F1',
   gray: {
@@ -31,6 +32,9 @@ module.exports = (theme) => ({
   red: {
     'bright': '#FF4955'
   },
+  buttercup: '#FFF7F1',
+  green: '#205959',
+
   secondary: {
     ...colors.slate,
   }
