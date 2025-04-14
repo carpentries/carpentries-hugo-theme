@@ -57,6 +57,10 @@
         {{ with .Content}}
           <div class="mb-10 prose h2-wrap max-w-none">
             {{ . }}
+            {{ $count_entries := len $entries }}
+            {{ if eq ($count_entries) 0 }}
+            <p><strong>There are currently no upcoming workshops.  Please check back again soon.</strong></p>
+            {{ end }}
           </div>
         {{ end }}
         {{ .Render "list-feedback" }}
