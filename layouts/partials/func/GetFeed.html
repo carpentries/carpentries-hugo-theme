@@ -40,7 +40,15 @@
     {{ with .Err }}
       {{ errorf "%s" . }}
     {{ else }}
-      {{ $data = .Content | transform.Unmarshal }}
+
+
+    {{ $rawData := .Content }} 
+
+    <!-- Unmarshal only if feed is not empty -->
+    {{ if ne $rawData "[]\n" }}
+      {{ $data = $rawData | transform.Unmarshal | default slice }}
+    {{ end }}
+
     {{ end }}
   {{ else }}
     {{ errorf "Unable to get remote resource %q" $url }}
