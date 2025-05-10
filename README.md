@@ -1,5 +1,7 @@
 # The Carpentries Hugo Theme
 
+This theme is used to build the websites for [The Carpentries](https://github.com/carpentries/carpentries.org), [Data Carpentry](https://github.com/datacarpentry/datacarpentry.org), [Library Carpentry](https://github.com/LibraryCarpentry/librarycarpentry.org), and [Software Carpentry](https://github.com/swcarpentry/software-carpentry.org/).  
+
 ## Features
 
 Styling is handled by [Tailwind](https://tailwindcss.com/)
@@ -8,6 +10,8 @@ Styling is handled by [Tailwind](https://tailwindcss.com/)
 Go Version 1.18
 
 ## Installation
+
+The first two steps may not be necessary when cloning one of our existing projects, as these are already set up as Hugo projects.  
 
 1. Init project as a hugo module with `hugo mod init {name of repo}`. Ex: `hugo mod init github.com/carpentries/my-project`
 2. Add the theme to your project using modules as such:
@@ -53,9 +57,9 @@ build:
 
 ## Maintenance
 
-### Maintain theme on your local machine
+### Test theme on your local machine
 
-To locally work on theme one should go into the project’s own `go.mod` file and add this line at the end:
+To locally test this theme, you can have your project use your local clone instead of this GitHub hosted version.  Go into the project’s own `go.mod` file and add this line at the end.
 
 ```diff
 module github.com/theNewDynamic/carpentries-project
