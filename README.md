@@ -2,6 +2,8 @@
 
 This theme is used to build the websites for [The Carpentries](https://github.com/carpentries/carpentries.org), [Data Carpentry](https://github.com/datacarpentry/datacarpentry.org), [Library Carpentry](https://github.com/LibraryCarpentry/librarycarpentry.org), and [Software Carpentry](https://github.com/swcarpentry/software-carpentry.org/).  
 
+This information is provided to give contributors the opportunity (but not the expecation) to build the site locally. All pull requests to the above four website repos will include a preview hosted by Netlify.
+
 ## Features
 
 Styling is handled by [Tailwind](https://tailwindcss.com/)
