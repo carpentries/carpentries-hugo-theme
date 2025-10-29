@@ -29,14 +29,17 @@
     <!-- Used primarily to identify Carpentries hosted workshops -->
     <!-- Note host is derived from venue in ParseWorkshop.html  -->
     {{ with $.Params.host }}
-    {{ with where $entries "venue" . }}
-      {{ $entries = . }}
+    {{ $filteredEntries := where $entries "venue" . }}
+    {{ $entries = $filteredEntries }}
+    {{ if $filteredEntries}}
+
       <style>
         select[name="host"]{
           display: none;
         }
       </style>
     {{ end }}
+
     {{ end }}
 
 
