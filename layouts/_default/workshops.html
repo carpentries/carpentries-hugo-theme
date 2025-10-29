@@ -24,6 +24,24 @@
       {{ end }}
     {{ end }}
 
+    <!-- Looks for host as in yaml frontmatter -->
+    <!-- Displays only workshops by that host -->
+    <!-- Used primarily to identify Carpentries hosted workshops -->
+    <!-- Note host is derived from venue in ParseWorkshop.html  -->
+    {{ with $.Params.host }}
+    {{ with where $entries "venue" . }}
+      {{ $entries = . }}
+      <style>
+        select[name="host"]{
+          display: none;
+        }
+      </style>
+    {{ end }}
+    {{ end }}
+
+
+
+
     {{ $filtersArgs := dict
       "entries" $entries
       "filters" (slice
