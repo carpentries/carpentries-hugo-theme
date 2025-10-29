@@ -89,6 +89,9 @@
         </div>
         <ul class="flex justify-center text-2xl pagination"></ul>
       </div>
+      <!-- Hides sidebar search if hide_sidebar_search is set to true in frontmatter -->
+      <!-- Useful for when workshop host is defined so other filters are not needed  -->
+      {{ if not $.Params.hide_sidebar_search }}
       <div class="relative md:col-span-4">
         <div class="sticky top-10 sidebar">
           {{ partial "filters" (dict
@@ -98,6 +101,7 @@
           {{ .Render "sidebar" }}
         </div>
       </div>
+      {{ end }}
     </div>
   </div>
 {{ end }}
