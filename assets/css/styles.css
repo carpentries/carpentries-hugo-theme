@@ -182,3 +182,14 @@ ul.badges li:before{
 .pagination li.active {
   @apply font-bold;
 }
+
+/* Prevents quotation marks from being added in block quotes */
+
+blockquote {
+  quotes: none !important;
+}
+
+blockquote p::before,
+blockquote p::after {
+  content: none !important;
+}
