@@ -38,3 +38,5 @@
   id: swc-r
 - name: Software Carpentry (Shell, Git, R for Reproducible Scientific Analysis)
   id: swc-reproducible-science
+- name: HPC Carpentry
+  id: hpcc
